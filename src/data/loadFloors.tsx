@@ -11,6 +11,8 @@ interface Room {
   height: number;
 }
 
+// Note to  self, add click room handler
+
 export function Floor1(props: ComponentProps<"svg">) {
   const rooms: Room[] = [
     { id: "room-1", type: "room", x: 50, y: 50, width: 150, height: 100 },
