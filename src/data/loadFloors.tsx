@@ -43,8 +43,8 @@ export function Floor1(props: ComponentProps<"svg">) {
       <path d="M50 50 H300 V250 H700 V450 H50 Z"></path>
 
       {/* Hallways */}
-      <rect x={200} y={50} width={100} height={200} />
-      <rect x={200} y={200} width={500} height={100} />
+      <rect x={200} y={50} width={100} height={200} fill="white" />
+      <rect x={200} y={200} width={500} height={100} fill="white" />
 
       {/* Rooms */}
       {rooms.map((room) => (
