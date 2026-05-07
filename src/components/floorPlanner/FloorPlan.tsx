@@ -68,7 +68,8 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
                   translateY(${getDelta(i) * translateY}px)
                   translateZ(${getDelta(i) * translateZ}px)
                   `,
-                opacity: getOpacity(i, floor, floors.length),
+                opacity: Math.max(0.15, 1 - Math.abs(getDelta(i)) * 0.2),
+                scale: 1 - Math.abs(getDelta(i) * 0.03),
                 // zIndex: 100 - Math.abs(offset(i)),
               }}
             />
