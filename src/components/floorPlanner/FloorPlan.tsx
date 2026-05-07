@@ -25,7 +25,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(25);
 
-  function offset(i: number) {
+  function getDelta(i: number) {
     return i - floor;
   }
 
@@ -63,10 +63,10 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               className={`absolute ${floor === i ? "" : ""}`}
               style={{
                 transform: `
-                  translateX(${offset(i) * transformX}px)
-                  translateY(${offset(i) * transformY}px)
-                  translateZ(${offset(i) * transformZ}px)
-                `,
+                  translateX(${getDelta(i) * transformX}px)
+                  translateY(${getDelta(i) * transformY}px)
+                  translateZ(${getDelta(i) * transformZ + 100}px)
+                  `,
                 opacity: getOpacity(i, floor, floors.length),
                 // zIndex: 100 - Math.abs(offset(i)),
               }}
