@@ -25,6 +25,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [rotateX, setRotateX] = useState(67);
   const [rotateY, setRotateY] = useState(5);
   const [rotateZ, setRotateZ] = useState(18);
+  const [distance, setDistance] = useState(2000);
 
   function getDelta(i: number) {
     return i - floor;
@@ -50,7 +51,10 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white overflow-clip">
-      <div className="perspective-distantes flex-1">
+      <div
+        className="perspective-distant flex-1"
+        style={{ perspective: `${distance}px` }}
+      >
         <div
           className="relative transform-3d h-[50svw]"
           style={{
@@ -65,12 +69,12 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               style={{
                 transform: `
                   translateX(${getDelta(i) * translateX}px)
-                  translateY(${getDelta(i) * translateY}px)
-                  translateZ(${getDelta(i) * translateZ}px)
+                  translateZ(${Math.abs(getDelta(i)) * translateZ}px)
+                  rotateX(${getDelta(i) * -10}deg)
                   `,
                 opacity: Math.max(0.15, 1 - Math.abs(getDelta(i)) * 0.2),
+                zIndex: 100 - getDelta(i),
                 scale: 1 - Math.abs(getDelta(i) * 0.03),
-                // zIndex: 100 - Math.abs(offset(i)),
               }}
             />
           ))}
@@ -104,21 +108,21 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
         <DebugSlider
           label="Translate X"
           value={translateX}
-          min={0}
+          min={-500}
           max={500}
           onChange={(val) => settranslateX(val)}
         />
         <DebugSlider
           label="Translate Y"
           value={translateY}
-          min={0}
+          min={-500}
           max={500}
           onChange={(val) => settranslateY(val)}
         />
         <DebugSlider
           label="Translate Z"
           value={translateZ}
-          min={0}
+          min={-500}
           max={500}
           onChange={(val) => settranslateZ(val)}
         />
@@ -143,6 +147,13 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           min={0}
           max={360}
           onChange={(val) => setRotateZ(val)}
+        />
+        <DebugSlider
+          label="Distance"
+          value={distance}
+          min={1000}
+          max={3000}
+          onChange={(val) => setDistance(val)}
         />
       </div>
       <FloorNumberSlider
