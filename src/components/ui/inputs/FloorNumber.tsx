@@ -19,17 +19,19 @@ export function FloorNumberSlider({
     console.log(e.currentTarget.value);
   }
   return (
-    <div className="relative w-8 h-auto">
-      <input
-        type="range"
-        value={floor}
-        min={lowestFloor}
-        max={highestFloor}
-        onChange={handleChange}
-        step={1}
-        className="absolute rotate-270 origin-left h-full"
-        id="myRange"
-      />
+    <div className="absolute left-5 top-1/2 -translate-y-1/2 h-full w-12">
+      <div className="relative w-8 h-full">
+        <input
+          type="range"
+          value={floor}
+          min={lowestFloor}
+          max={highestFloor}
+          onChange={handleChange}
+          step={1}
+          className="absolute rotate-270 origin-left h-full"
+          id="myRange"
+        />
+      </div>
     </div>
   );
 }

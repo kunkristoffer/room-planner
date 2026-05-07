@@ -1,6 +1,7 @@
 import { Floor1 } from "@/data/loadFloors";
-import { FloorNumberSlider } from "../ui/sliders/FloorNumber";
+import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
+import { DebugSlider } from "../ui/inputs/DebugSlider";
 
 interface FloorPlanProps {
   floor: number;
@@ -16,14 +17,14 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const floors = Array.from({ length: 10 }, (_, i) => i);
 
   // Transform svgs
-  const [transformX, setTransformX] = useState(0);
-  const [transformY, setTransformY] = useState(250);
-  const [transformZ, setTransformZ] = useState(250);
+  const [translateX, settranslateX] = useState(0);
+  const [translateY, settranslateY] = useState(180);
+  const [translateZ, settranslateZ] = useState(235);
 
   // Transform container
-  const [rotateX, setRotateX] = useState(70);
-  const [rotateY, setRotateY] = useState(0);
-  const [rotateZ, setRotateZ] = useState(25);
+  const [rotateX, setRotateX] = useState(67);
+  const [rotateY, setRotateY] = useState(5);
+  const [rotateZ, setRotateZ] = useState(18);
 
   function getDelta(i: number) {
     return i - floor;
@@ -48,7 +49,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   }
 
   return (
-    <div className="flex flex-row! gap-2 bg-white overflow-clip">
+    <div className="relative flex flex-row! gap-2 bg-white overflow-clip">
       <div className="perspective-distantes flex-1">
         <div
           className="relative transform-3d h-[50svw]"
@@ -63,9 +64,9 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               className={`absolute ${floor === i ? "" : ""}`}
               style={{
                 transform: `
-                  translateX(${getDelta(i) * transformX}px)
-                  translateY(${getDelta(i) * transformY}px)
-                  translateZ(${getDelta(i) * transformZ + 100}px)
+                  translateX(${getDelta(i) * translateX}px)
+                  translateY(${getDelta(i) * translateY}px)
+                  translateZ(${getDelta(i) * translateZ}px)
                   `,
                 opacity: getOpacity(i, floor, floors.length),
                 // zIndex: 100 - Math.abs(offset(i)),
@@ -98,67 +99,50 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           ))} */}
         </div>
       </div>
-      <div className="text-black z-50">
-        <label>
-          <p>Transform X - {transformX}</p>
-          <input
-            type="range"
-            value={transformX}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformX(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Transform Y - {transformY}</p>
-          <input
-            type="range"
-            value={transformY}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformY(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Transform Z - {transformZ}</p>
-          <input
-            type="range"
-            value={transformZ}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformZ(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate X - {rotateX}</p>
-          <input
-            type="range"
-            value={rotateX}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateX(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate Y - {rotateY}</p>
-          <input
-            type="range"
-            value={rotateY}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateY(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate Z - {rotateZ}</p>
-          <input
-            type="range"
-            value={rotateZ}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateZ(e.currentTarget.valueAsNumber)}
-          />
-        </label>
+      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4">
+        <DebugSlider
+          label="Translate X"
+          value={translateX}
+          min={0}
+          max={500}
+          onChange={(val) => settranslateX(val)}
+        />
+        <DebugSlider
+          label="Translate Y"
+          value={translateY}
+          min={0}
+          max={500}
+          onChange={(val) => settranslateY(val)}
+        />
+        <DebugSlider
+          label="Translate Z"
+          value={translateZ}
+          min={0}
+          max={500}
+          onChange={(val) => settranslateZ(val)}
+        />
+        <hr />
+        <DebugSlider
+          label="Rotate X"
+          value={rotateX}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateX(val)}
+        />
+        <DebugSlider
+          label="Rotate Y"
+          value={rotateY}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateY(val)}
+        />
+        <DebugSlider
+          label="Rotate Z"
+          value={rotateZ}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateZ(val)}
+        />
       </div>
       <FloorNumberSlider
         floor={floor}
