@@ -19,8 +19,8 @@ export function FloorNumberSlider({
     console.log(e.currentTarget.value);
   }
   return (
-    <div className="absolute left-5 top-1/2 -translate-y-1/2 h-full w-12">
-      <div className="relative w-8 h-full">
+    <div className="absolute left-5 top-1/2 -translate-y-1/2">
+      <div className="relative bg-red-400">
         <input
           type="range"
           value={floor}
@@ -28,7 +28,7 @@ export function FloorNumberSlider({
           max={highestFloor}
           onChange={handleChange}
           step={1}
-          className="absolute rotate-270 origin-left h-full"
+          className="absolute -rotate-90 origin-bottom-left translate-y-16"
           id="myRange"
         />
       </div>

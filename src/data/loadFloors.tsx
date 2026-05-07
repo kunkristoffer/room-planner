@@ -57,7 +57,7 @@ export function Floor1(props: ComponentProps<"svg">) {
           height={room.height}
           className={`
             ${room.type === "room" ? "fill-purple-100 hover:fill-purple-300" : ""}
-            ${room.type === "bathroom" ? "fill-green-100" : ""}
+            ${room.type === "bathroom" ? "fill-green-100 hover:fill-green-300" : ""}
           `}
         />
       ))}

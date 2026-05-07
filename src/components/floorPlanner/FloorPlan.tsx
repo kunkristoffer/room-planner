@@ -49,7 +49,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   }
 
   return (
-    <div className="relative flex flex-row! gap-2 bg-white overflow-clip">
+    <div className="relative size-full flex flex-row! gap-2 bg-white overflow-clip">
       <div className="perspective-distantes flex-1">
         <div
           className="relative transform-3d h-[50svw]"
