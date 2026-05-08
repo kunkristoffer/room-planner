@@ -23,7 +23,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   // Transform svgs
   const [translateX, settranslateX] = useState(0);
   const [translateY, settranslateY] = useState(0);
-  const [translateZ, settranslateZ] = useState(0);
+  const [translateZ, settranslateZ] = useState(30);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);

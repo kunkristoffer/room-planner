@@ -31,14 +31,14 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, mode, override
 
 	return {
 		transform: `
-			translateX(${1 * (overrides?.transform?.x || 0)}px)
-			translateY(${1 * (overrides?.transform?.y || 0)}px)
-			translateZ(${1 * (overrides?.transform?.z || 0)}px)
-			rotateX(${postition * (overrides?.rotate?.x || 0)}deg)
-			rotateY(${postition * (overrides?.rotate?.y || 0)}deg)
-			rotateZ(${postition * (overrides?.rotate?.z || 0)}deg)
+			translateX(${floor * (overrides?.transform?.x || 0)}px)
+			translateY(${floor * (overrides?.transform?.y || 0)}px)
+			translateZ(${floor * (overrides?.transform?.z || 0)}px)
+			rotateX(${1 * (overrides?.rotate?.x || 0)}deg)
+			rotateY(${1 * (overrides?.rotate?.y || 0)}deg)
+			rotateZ(${1 * (overrides?.rotate?.z || 0)}deg)
 		`,
 		zIndex: 100 - delta,
-		scale: 1 - Math.abs(delta * 0.03),
+		backgroundColor: floor === curFloor ? "rgba(0,0,0,0.1)" : ""
 	}
 }
