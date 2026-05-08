@@ -2,6 +2,7 @@ import { Floor1 } from "@/data/loadFloors";
 import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
+import { generateFloorStyles, ViewMode } from "@/utils/styles";
 
 interface FloorPlanProps {
   floor: number;
@@ -16,6 +17,9 @@ interface FloorPlanProps {
 export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const floors = Array.from({ length: 10 }, (_, i) => i);
 
+  // Mode select
+  const [viewMode, setViewMode] = useState<ViewMode>("3D");
+
   // Transform svgs
   const [translateX, settranslateX] = useState(0);
   const [translateY, settranslateY] = useState(180);
@@ -26,28 +30,6 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [rotateY, setRotateY] = useState(5);
   const [rotateZ, setRotateZ] = useState(18);
   const [distance, setDistance] = useState(2000);
-
-  function getDelta(i: number) {
-    return i - floor;
-  }
-
-  function getOpacity(
-    index: number,
-    selectedIndex: number,
-    maxDistance: number,
-  ) {
-    const distance = Math.abs(index - selectedIndex);
-
-    const minOpacity = 0;
-    const maxOpacity = 0.9;
-
-    const normalized = Math.min(distance / maxDistance, 1);
-
-    // Ease-out curve (fast increase, slow towards max)
-    const eased = 1 - Math.pow(normalized, 2);
-
-    return minOpacity + (maxOpacity - minOpacity) * eased;
-  }
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white overflow-clip">
@@ -66,42 +48,13 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               key={i}
               data-floor={i}
               className={`absolute ${floor === i ? "" : ""}`}
-              style={{
-                transform: `
-                  translateX(${getDelta(i) * translateX}px)
-                  translateZ(${Math.abs(getDelta(i)) * translateZ}px)
-                  rotateX(${getDelta(i) * -10}deg)
-                  `,
-                opacity: Math.max(0.15, 1 - Math.abs(getDelta(i)) * 0.2),
-                zIndex: 100 - getDelta(i),
-                scale: 1 - Math.abs(getDelta(i) * 0.03),
-              }}
+              style={generateFloorStyles({
+                curFloor: i,
+                maxFloors: floors.length,
+                mode: viewMode,
+              })}
             />
           ))}
-
-          {/* {floors.map((item, i) => (
-            
-            <Image
-              key={i}
-              src={item}
-              alt={`Image of floor ${i + 1}`}
-              className="absolute origin-center inset-0 w-full"
-              style={{
-                backgroundColor: floor === i ? "red" : "",
-                transform: `
-                  translateZ(${Math.abs(floor - i) * 40}px)
-                  translateY(${Math.abs(floor - i) - 20}px)
-                  scale(${1 - Math.abs(getOffset(i)) * 0.05})
-                `,
-                opacity: floors.length / Math.abs(floor - i),
-                zIndex: 100 - Math.abs(getOffset(i)),
-              }}
-              width={800}
-              height={400}
-              unoptimized
-              loading="eager"
-            />
-          ))} */}
         </div>
       </div>
       <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4">
