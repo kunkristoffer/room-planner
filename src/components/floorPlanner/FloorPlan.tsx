@@ -24,15 +24,18 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [translateX, settranslateX] = useState(0);
   const [translateY, settranslateY] = useState(180);
   const [translateZ, settranslateZ] = useState(235);
-
-  // Transform container
   const [rotateX, setRotateX] = useState(67);
   const [rotateY, setRotateY] = useState(5);
   const [rotateZ, setRotateZ] = useState(18);
+
+  // Transform container
+  const [rotateViewX, setRotateViewX] = useState(67);
+  const [rotateViewY, setRotateViewY] = useState(5);
+  const [rotateViewZ, setRotateViewZ] = useState(18);
   const [distance, setDistance] = useState(2000);
 
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white overflow-clip">
+    <div className="relative size-full flex flex-row! gap-2 bg-white">
       <div
         className="perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
@@ -40,7 +43,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
         <div
           className="relative transform-3d h-[50svw]"
           style={{
-            transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
+            transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
           {floors.map((_, i) => (
@@ -49,9 +52,21 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               data-floor={i}
               className={`absolute ${floor === i ? "" : ""}`}
               style={generateFloorStyles({
-                curFloor: i,
+                curFloor: floor,
                 maxFloors: floors.length,
                 mode: viewMode,
+                overrides: {
+                  transform: {
+                    x: translateX,
+                    y: translateY,
+                    z: translateZ,
+                  },
+                  rotate: {
+                    x: rotateX,
+                    y: rotateY,
+                    z: rotateZ,
+                  },
+                },
               })}
             />
           ))}
@@ -79,20 +94,12 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           max={500}
           onChange={(val) => settranslateZ(val)}
         />
-        <hr />
         <DebugSlider
           label="Rotate X"
           value={rotateX}
           min={0}
           max={360}
           onChange={(val) => setRotateX(val)}
-        />
-        <DebugSlider
-          label="Rotate Y"
-          value={rotateY}
-          min={0}
-          max={360}
-          onChange={(val) => setRotateY(val)}
         />
         <DebugSlider
           label="Rotate Z"
@@ -102,10 +109,39 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           onChange={(val) => setRotateZ(val)}
         />
         <DebugSlider
+          label="Rotate Z"
+          value={rotateZ}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateZ(val)}
+        />
+        <hr />
+        <DebugSlider
+          label="Rotate X"
+          value={rotateViewX}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewX(val)}
+        />
+        <DebugSlider
+          label="Rotate Y"
+          value={rotateViewY}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewY(val)}
+        />
+        <DebugSlider
+          label="Rotate Z"
+          value={rotateViewZ}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewZ(val)}
+        />
+        <DebugSlider
           label="Distance"
           value={distance}
-          min={1000}
-          max={3000}
+          min={0}
+          max={5000}
           onChange={(val) => setDistance(val)}
         />
       </div>

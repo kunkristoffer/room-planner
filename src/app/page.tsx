@@ -60,7 +60,7 @@ export default function Home() {
               were all small hobbit-boys and hobbit-girls.
             </p>
           </div>
-          <div className="flex flex-col gap-4 aspect-video w-full overflow-hidden rounded-md">
+          <div className="flex flex-col gap-4 aspect-video w-full rounded-md">
             <FloorPlan floor={floor} room={room} handleClick={handleClick} />
           </div>
           <div className="flex flex-col gap-4">
