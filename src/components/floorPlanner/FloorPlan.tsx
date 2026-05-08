@@ -2,7 +2,7 @@ import { Floor1 } from "@/data/loadFloors";
 import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
-import { generateFloorStyles, ViewMode } from "@/utils/styles";
+import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 
 interface FloorPlanProps {
   floor: number;
@@ -22,11 +22,11 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
 
   // Transform svgs
   const [translateX, settranslateX] = useState(0);
-  const [translateY, settranslateY] = useState(180);
-  const [translateZ, settranslateZ] = useState(235);
-  const [rotateX, setRotateX] = useState(67);
-  const [rotateY, setRotateY] = useState(5);
-  const [rotateZ, setRotateZ] = useState(18);
+  const [translateY, settranslateY] = useState(0);
+  const [translateZ, settranslateZ] = useState(0);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+  const [rotateZ, setRotateZ] = useState(0);
 
   // Transform container
   const [rotateViewX, setRotateViewX] = useState(67);
@@ -102,11 +102,11 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           onChange={(val) => setRotateX(val)}
         />
         <DebugSlider
-          label="Rotate Z"
-          value={rotateZ}
+          label="Rotate Y"
+          value={rotateY}
           min={0}
           max={360}
-          onChange={(val) => setRotateZ(val)}
+          onChange={(val) => setRotateY(val)}
         />
         <DebugSlider
           label="Rotate Z"

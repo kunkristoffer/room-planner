@@ -1,5 +1,4 @@
 import { CSSProperties } from "react";
-import { getDelta } from "./misc";
 
 export type ViewMode = "2D" | "3D"
 
@@ -28,13 +27,15 @@ export function generateFloorStyles({ curFloor, maxFloors, mode, overrides }: Pr
 	const postition = curFloor - maxFloors
 	const delta = Math.abs(postition)
 	const curve = Math.pow(delta, 1.6)
-	console.log(`Floor: ${curFloor} pos: ${postition} delta: ${delta} curve: ${curve}`)
 
 	return {
 		transform: `
-			translateX(${postition * (overrides?.transform?.x || 25)}px)
+			translateX(${postition * (overrides?.transform?.x || 0)}px)
 			translateY(${postition * (overrides?.transform?.y || 0)}px)
-			translateZ(${postition * (overrides?.transform?.z || 0)}px)
+			translateZ(${delta * (overrides?.transform?.z || 0)}px)
+			rotateX(${postition * (overrides?.rotate?.x || 0)}deg)
+			rotateY(${postition * (overrides?.rotate?.y || 0)}deg)
+			rotateZ(${postition * (overrides?.rotate?.z || 0)}deg)
 		`,
 		zIndex: 100 - delta,
 		scale: 1 - Math.abs(delta * 0.03),
