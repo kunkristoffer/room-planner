@@ -52,6 +52,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
               data-floor={i}
               className={`absolute ${floor === i ? "" : ""}`}
               style={generateFloorStyles({
+                floor: i,
                 curFloor: floor,
                 maxFloors: floors.length,
                 mode: viewMode,
