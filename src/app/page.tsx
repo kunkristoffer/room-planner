@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main className="flex-1 container mx-auto flex flex-col gap-4">
       <div className="relative aspect-3/1 rounded-md overflow-hidden mb-12">
-        <Image src="/game.png" alt="game picture" fill />
+        <Image src="/game.png" alt="game picture" fill loading="eager" />
         <div className="absolute left-1/5 bottom-0 translate-y-1/2 bg-background p-8 rounded-md">
           <h1 className="text-center text-4xl">Event title</h1>
           <p>
