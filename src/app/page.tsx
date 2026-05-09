@@ -10,6 +10,8 @@ export default function Home() {
   const [room, setRoom] = useState<string>("");
 
   function handleClick(newFloor: number, id: string) {
+    console.log(newFloor, id);
+
     setRoom(id);
     setFloor(newFloor);
   }
@@ -58,7 +60,11 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-4 aspect-video w-full rounded-md">
-            <FloorPlan floor={floor} room={room} handleClick={handleClick} />
+            <FloorPlan
+              curFloor={floor}
+              curRoom={room}
+              handleClick={handleClick}
+            />
           </div>
           <div className="flex flex-col gap-4">
             <p>

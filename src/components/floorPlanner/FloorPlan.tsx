@@ -5,8 +5,8 @@ import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 
 interface FloorPlanProps {
-  floor: number;
-  room: string;
+  curFloor: number;
+  curRoom: string;
   handleClick: (floor: number, id: string) => void;
 }
 
@@ -14,7 +14,7 @@ interface FloorPlanProps {
  * Needs two views: top-down and angled, needs to be stored in state
  */
 
-export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
+export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
   const floors = Array.from({ length: 10 }, (_, i) => i);
 
   // Mode select
@@ -50,11 +50,13 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
             <Floor1
               key={i}
               floor={i}
-              className={`absolute ${floor === i ? "" : ""} transition-all duration-1000`}
+              curFloor={curFloor}
+              curRoom={curRoom}
+              className={`absolute ${curFloor === i ? "" : ""} transition-all duration-1000`}
               handleClick={handleClick}
               style={generateFloorStyles({
                 floor: i,
-                curFloor: floor,
+                curFloor: curFloor,
                 maxFloors: floors.length,
                 mode: viewMode,
                 overrides: {
@@ -148,7 +150,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
         />
       </div>
       <FloorNumberSlider
-        floor={floor}
+        floor={curFloor}
         floors={floors}
         handleFloor={handleClick}
       />
