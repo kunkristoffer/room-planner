@@ -24,7 +24,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
   const [translateZ, settranslateZ] = useState(130);
-  const [rotateX, setRotateX] = useState(5);
+  const [rotateX, setRotateX] = useState(-5);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
 
@@ -98,21 +98,21 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
         <DebugSlider
           label="Rotate X"
           value={rotateX}
-          min={0}
+          min={-360}
           max={360}
           onChange={(val) => setRotateX(val)}
         />
         <DebugSlider
           label="Rotate Y"
           value={rotateY}
-          min={0}
+          min={-360}
           max={360}
           onChange={(val) => setRotateY(val)}
         />
         <DebugSlider
           label="Rotate Z"
           value={rotateZ}
-          min={0}
+          min={-360}
           max={360}
           onChange={(val) => setRotateZ(val)}
         />
