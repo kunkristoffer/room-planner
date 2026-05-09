@@ -21,10 +21,10 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   const [viewMode, setViewMode] = useState<ViewMode>("3D");
 
   // Transform svgs
-  const [translateX, settranslateX] = useState(0);
+  const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
-  const [translateZ, settranslateZ] = useState(30);
-  const [rotateX, setRotateX] = useState(0);
+  const [translateZ, settranslateZ] = useState(130);
+  const [rotateX, setRotateX] = useState(5);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
 
@@ -37,7 +37,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
       <div
-        className="perspective-distant flex-1"
+        className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
       >
         <div
@@ -50,7 +50,7 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
             <Floor1
               key={i}
               data-floor={i}
-              className={`absolute ${floor === i ? "" : ""}`}
+              className={`absolute ${floor === i ? "" : ""} transition-all duration-500`}
               style={generateFloorStyles({
                 floor: i,
                 curFloor: floor,
