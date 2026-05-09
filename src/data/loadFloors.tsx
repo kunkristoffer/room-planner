@@ -11,9 +11,12 @@ interface Room {
   height: number;
 }
 
-// Note to  self, add click room handler
+interface FloorProps extends ComponentProps<"svg"> {
+  floor: number;
+  handleClick: (floor: number, id: string) => void;
+}
 
-export function Floor1(props: ComponentProps<"svg">) {
+export function Floor1({ floor, handleClick, ...props }: FloorProps) {
   const rooms: Room[] = [
     { id: "room-1", type: "room", x: 50, y: 50, width: 150, height: 100 },
     { id: "room-2", type: "room", x: 50, y: 150, width: 150, height: 100 },
@@ -59,6 +62,7 @@ export function Floor1(props: ComponentProps<"svg">) {
             ${room.type === "room" ? "fill-purple-100 hover:fill-purple-300" : ""}
             ${room.type === "bathroom" ? "fill-green-100 hover:fill-green-300" : ""}
           `}
+          onClick={() => handleClick(floor, room.id)}
         />
       ))}
 

@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 interface FloorNumberSliderProps {
   floor: number;
   floors: number[];
-  handleFloor: (id: string, type: "floor" | "room") => void;
+  handleFloor: (floor: number, id: string) => void;
 }
 
 export function FloorNumberSlider({
@@ -15,7 +15,7 @@ export function FloorNumberSlider({
   const highestFloor = floors.length ? floors.at(-1) : lowestFloor;
 
   function handleChange(e: ChangeEvent<HTMLInputElement, HTMLInputElement>) {
-    handleFloor(e.currentTarget.value, "floor");
+    handleFloor(Number(e.currentTarget.value), "");
     console.log(e.currentTarget.value);
   }
   return (

@@ -27,7 +27,7 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, mode, override
 	// Base calculations
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
-	const curve = Math.pow(delta, 1.2)
+	const curve = Math.pow(delta, 0.2)
 
 	return {
 		transform: `
@@ -39,6 +39,7 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, mode, override
 			rotateZ(${1 * (overrides?.rotate?.z || 0)}deg)
 		`,
 		zIndex: 100 - delta,
+		opacity: delta > 0 ? 0.3 : 1,
 		backgroundColor: floor === curFloor ? "rgba(0,0,0,0.1)" : ""
 	}
 }

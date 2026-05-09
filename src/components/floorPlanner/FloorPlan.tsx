@@ -7,7 +7,7 @@ import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 interface FloorPlanProps {
   floor: number;
   room: string;
-  handleClick: (id: string, type: "floor" | "room") => void;
+  handleClick: (floor: number, id: string) => void;
 }
 
 /** Notes:
@@ -49,8 +49,9 @@ export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
           {floors.map((_, i) => (
             <Floor1
               key={i}
-              data-floor={i}
-              className={`absolute ${floor === i ? "" : ""} transition-all duration-500`}
+              floor={i}
+              className={`absolute ${floor === i ? "" : ""} transition-all duration-1000`}
+              handleClick={handleClick}
               style={generateFloorStyles({
                 floor: i,
                 curFloor: floor,

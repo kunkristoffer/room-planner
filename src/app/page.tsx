@@ -9,12 +9,9 @@ export default function Home() {
   const [floor, setFloor] = useState(0);
   const [room, setRoom] = useState<string>("");
 
-  function handleClick(id: string, type: "room" | "floor") {
-    console.log(`handleClick > type: ${type} >id: ${id}`);
-
-    if (type === "floor") {
-      setFloor(Number(id));
-    }
+  function handleClick(newFloor: number, id: string) {
+    setRoom(id);
+    setFloor(newFloor);
   }
 
   return (
