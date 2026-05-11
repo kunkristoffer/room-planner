@@ -24,6 +24,7 @@ export function GenerateFloor({
       stroke="black"
       strokeWidth="2"
       {...props}
+      onClick={() => handleClick(floor, "")}
     >
       {/**Outer shape (L building)*/}
       <path d="M50 50 H300 V250 H700 V450 H50 Z"></path>
@@ -38,19 +39,7 @@ export function GenerateFloor({
           key={room.id}
           id={room.id}
           points={room.points.map((p) => p.x + "," + p.y).join(",")}
-          fill="white"
-          stroke="black"
           strokeWidth={room.wallThickness ?? 2}
-        />
-      ))}
-      {/* {rooms.map((room) => (
-        <rect
-          key={room.id}
-          id={room.id}
-          x={room.x}
-          y={room.y}
-          width={room.width}
-          height={room.height}
           className={`
             ${room.type === "room" ? "fill-purple-100 hover:fill-purple-300" : ""}
             ${room.id === curRoom && floor === curFloor ? "fill-red-300" : ""}
@@ -58,7 +47,7 @@ export function GenerateFloor({
           `}
           onClick={() => handleClick(floor, room.id)}
         />
-      ))} */}
+      ))}
 
       {/**Vertical hallway doors*/}
       <line
