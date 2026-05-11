@@ -43,6 +43,7 @@ export function FloorPlan({
 
   // Calculations
   const filledFloors = fillFloorNumbers(floors);
+  const floorNumbers = filledFloors.map((floor) => floor.floor);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
@@ -162,7 +163,7 @@ export function FloorPlan({
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={filledFloors}
+        floors={floorNumbers}
         handleFloor={handleClick}
       />
     </div>
