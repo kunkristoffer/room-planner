@@ -42,8 +42,8 @@ export function FloorPlan({
   const [distance, setDistance] = useState(2000);
 
   // Calculations
+  const availableFloors = floors.map((floor) => floor.floor);
   const filledFloors = fillFloorNumbers(floors);
-  const floorNumbers = filledFloors.map((floor) => floor.floor);
   const floorLabel = filledFloors.find((floor) => floor.floor === curFloor);
 
   return (
@@ -169,7 +169,7 @@ export function FloorPlan({
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={floorNumbers}
+        floors={availableFloors}
         handleFloor={handleClick}
       />
     </div>
