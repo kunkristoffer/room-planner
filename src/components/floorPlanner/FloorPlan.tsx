@@ -36,9 +36,9 @@ export function FloorPlan({
   const [rotateZ, setRotateZ] = useState(0);
 
   // Transform container
-  const [rotateViewX, setRotateViewX] = useState(67);
+  const [rotateViewX, setRotateViewX] = useState(65);
   const [rotateViewY, setRotateViewY] = useState(5);
-  const [rotateViewZ, setRotateViewZ] = useState(18);
+  const [rotateViewZ, setRotateViewZ] = useState(10);
   const [distance, setDistance] = useState(2000);
 
   // Calculations
@@ -53,7 +53,7 @@ export function FloorPlan({
         style={{ perspective: `${distance}px` }}
       >
         <div
-          className="relative transform-3d"
+          className="relative transform-3d h-full w-full"
           style={{
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
