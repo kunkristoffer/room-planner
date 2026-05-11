@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 import { FloorProp } from "@/types/Rooms";
+import { GenerateFloor } from "@/data/generateFloor";
 
 interface FloorPlanProps {
   curFloor: number;
@@ -51,12 +52,13 @@ export function FloorPlan({
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
-          {Object.values(floors).map((_, i, arr) => (
-            <Floor1
+          {Object.values(floors).map((floor, i, arr) => (
+            <GenerateFloor
               key={i}
               floor={i}
               curFloor={curFloor}
               curRoom={curRoom}
+              rooms={floor}
               className={`absolute ${curFloor === i ? "" : ""} transition-all duration-1000`}
               handleClick={handleClick}
               style={generateFloorStyles({
