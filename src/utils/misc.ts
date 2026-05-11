@@ -12,8 +12,7 @@ export function fillFloorNumbers(floors: FloorProp[]) {
     const max = Math.max(...floorNumbers)
 
     const missingFloors = Array.from({ length: max - min + 1 }, (_, i) => ({ floor: min + i, rooms: [] }) as FloorProp).filter(floor => !floorNumbers.includes(floor.floor))
-    console.log(missingFloors);
+    const filledFloors = [...floors, ...missingFloors].sort((cur, prev) => cur.floor - prev.floor)
 
-
-    return [...floors, ...missingFloors]
+    return filledFloors
 }
