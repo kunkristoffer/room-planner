@@ -1,31 +1,50 @@
-import { useState } from "react";
+"use client";
+
+// Globals
 import { type FloorProp } from "@/types/Rooms";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 import { fillFloorNumbers } from "@/utils/misc";
 import { GenerateFloor } from "@/utils/generateFloor";
-import { generateFloorStyles, type ViewMode } from "@/utils/styles";
+
+// Components
 import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { ViewModeSelect } from "../ui/inputs/ViewMode";
 
 interface FloorPlanProps {
-  curFloor: number;
-  curRoom: string;
   floors: FloorProp[];
-  viewMode: ViewMode;
-  handleClick: (floor: number, id: string, mode?: ViewMode) => void;
 }
 
-/** Notes:
- * Needs two views: top-down and angled, needs to be stored in state
- */
+export function FloorPlan({ floors }: FloorPlanProps) {
+  // Get state from url
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const router = useRouter();
+  const viewMode = (searchParams.get("view") as ViewMode) ?? "3D";
+  const curFloor = Number(searchParams.get("floor")) ?? "1";
+  const curRoom = searchParams.get("room") ?? "";
 
-export function FloorPlan({
-  curFloor,
-  curRoom,
-  floors,
-  viewMode,
-  handleClick,
-}: FloorPlanProps) {
+  // Handle state change
+  function handleClick(newFloor: number, id: string, mode?: ViewMode) {
+    const params = new URLSearchParams(searchParams);
+
+    params.set("floor", String(newFloor));
+
+    if (id) {
+      params.set("room", id);
+    } else {
+      params.delete("room");
+    }
+
+    if (mode) {
+      params.set("view", mode);
+    }
+
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+  }
+
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
@@ -91,7 +110,7 @@ export function FloorPlan({
           ))}
         </div>
       </div>
-      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4 hidden">
+      <div className="absolute right-0 flex-col gap-2 text-black z-50 w-36 p-4 hidden">
         <DebugSlider
           label="Translate X"
           value={translateX}

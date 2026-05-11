@@ -1,39 +1,9 @@
-"use client";
-
 import Image from "next/image";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import { floors } from "@/data/floors";
-import { ViewMode } from "@/utils/styles";
 
-export default function Home() {
-  const searchParams = useSearchParams();
-  const pathName = usePathname();
-  const router = useRouter();
-
-  const viewMode = (searchParams.get("view") as ViewMode) ?? "3D";
-  const floor = Number(searchParams.get("floor")) ?? "1";
-  const room = searchParams.get("room") ?? "";
-
-  function handleClick(newFloor: number, id: string, mode?: ViewMode) {
-    const params = new URLSearchParams(searchParams);
-
-    params.set("floor", String(newFloor));
-
-    if (id) {
-      params.set("room", id);
-    } else {
-      params.delete("room");
-    }
-
-    if (mode) {
-      params.set("view", mode);
-    }
-
-    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
-  }
-
+export default async function Home() {
   return (
     <main className="flex-1 container mx-auto flex flex-col gap-4">
       <div className="relative aspect-3/1 rounded-md overflow-hidden mb-12">
@@ -78,13 +48,7 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-4 aspect-video w-full rounded-md">
-            <FloorPlan
-              curFloor={floor}
-              curRoom={room}
-              floors={floors}
-              viewMode={viewMode}
-              handleClick={handleClick}
-            />
+            <FloorPlan floors={floors} />
           </div>
           <div className="flex flex-col gap-4">
             <p>
@@ -137,7 +101,7 @@ export default function Home() {
             </span>
           </div>
           <div className="border rounded-md p-4">
-            <FloorDetails floor={floor} room={room} />
+            <FloorDetails />
           </div>
         </div>
       </div>
