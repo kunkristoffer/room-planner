@@ -8,5 +8,5 @@ export function fillFloorNumbers(floors: number[]) {
     const min = Math.min(...floors)
     const max = Math.max(...floors)
 
-    return Array.from({ length: min - max }, (_, i) => min)
+    return Array.from({ length: max - min + 1 }, (_, i) => min + i)
 }
