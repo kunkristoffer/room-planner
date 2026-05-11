@@ -1,4 +1,4 @@
-type RoomType = "room" | "bathroom";
+export type RoomType = "room" | "bathroom" | "stair" | "elevator" | "utility";
 type Coordinate = { x: number; y: number };
 type Door = "left" | "right" | "double" | "sliding";
 
@@ -7,7 +7,7 @@ export interface Room {
     label?: string
     type: RoomType;
     points: Coordinate[];
-    doors: (Coordinate & { angle: number; type?: Door })[];
+    doors?: (Coordinate & { angle: number; type?: Door })[];
     windows?: (Coordinate & { angle: number; width?: number })[];
     wallThickness?: number;
 }
