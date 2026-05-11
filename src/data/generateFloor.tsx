@@ -59,6 +59,16 @@ export function Floor1({
 
       {/* Rooms */}
       {rooms.map((room) => (
+        <polygon
+          key={room.id}
+          id={room.id}
+          points={room.points.map((p) => p.x + "," + p.y).join(",")}
+          fill="white"
+          stroke="black"
+          strokeWidth={room.wallThickness ?? 2}
+        />
+      ))}
+      {/* {rooms.map((room) => (
         <rect
           key={room.id}
           id={room.id}
@@ -73,7 +83,7 @@ export function Floor1({
           `}
           onClick={() => handleClick(floor, room.id)}
         />
-      ))}
+      ))} */}
 
       {/**Vertical hallway doors*/}
       <line
