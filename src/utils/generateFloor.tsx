@@ -1,11 +1,12 @@
 import { RoomType, type Room } from "@/types/Rooms";
 import { ComponentProps, MouseEvent } from "react";
+import { ViewMode } from "./styles";
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
   floor: number;
   curFloor: number;
   curRoom: string;
-  handleClick: (floor: number, id: string) => void;
+  handleClick: (floor: number, id: string, mode: ViewMode) => void;
 }
 
 export function GenerateFloor({
@@ -18,13 +19,12 @@ export function GenerateFloor({
 }: FloorProps) {
   function updateCurrent(event: MouseEvent<SVGSVGElement>) {
     const targetElement = event.target;
-    let roomID = "";
 
     if (targetElement instanceof SVGPolygonElement) {
-      roomID = targetElement.id;
+      handleClick(floor, targetElement.id, "2D");
+    } else {
+      handleClick(floor, "", "3D");
     }
-
-    handleClick(floor, roomID);
   }
 
   function getRoomColor(

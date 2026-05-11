@@ -1,17 +1,18 @@
-import { Floor1 } from "@/data/loadFloors";
-import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
-import { DebugSlider } from "../ui/inputs/DebugSlider";
-import { generateFloorStyles, type ViewMode } from "@/utils/styles";
-import { FloorProp } from "@/types/Rooms";
-import { GenerateFloor } from "@/utils/generateFloor";
+import { type FloorProp } from "@/types/Rooms";
 import { fillFloorNumbers } from "@/utils/misc";
+import { GenerateFloor } from "@/utils/generateFloor";
+import { generateFloorStyles, type ViewMode } from "@/utils/styles";
+import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
+import { DebugSlider } from "../ui/inputs/DebugSlider";
+import { ViewModeSelect } from "../ui/inputs/ViewMode";
 
 interface FloorPlanProps {
   curFloor: number;
   curRoom: string;
   floors: FloorProp[];
-  handleClick: (floor: number, id: string) => void;
+  viewMode: ViewMode;
+  handleClick: (floor: number, id: string, mode?: ViewMode) => void;
 }
 
 /** Notes:
@@ -22,11 +23,9 @@ export function FloorPlan({
   curFloor,
   curRoom,
   floors,
+  viewMode,
   handleClick,
 }: FloorPlanProps) {
-  // Mode select
-  const [viewMode, setViewMode] = useState<ViewMode>("3D");
-
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
@@ -47,20 +46,18 @@ export function FloorPlan({
   const floorLabel = filledFloors.find((floor) => floor.floor === curFloor);
 
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white">
-      <span className="absolute p-2 text-black">
-        <p>
-          {curFloor}. Et {floorLabel?.label ? `(${floorLabel.label})` : ""}
-        </p>
-      </span>
+    <div className="relative size-full flex flex-row! gap-2 bg-white overflow-hidden rounded-lg">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
       >
         <div
-          className="relative transform-3d h-full w-full"
+          className="relative  h-full w-full transform-3d transition-all duration-1000"
           style={{
-            transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
+            transform:
+              viewMode === "3D"
+                ? `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`
+                : "",
           }}
         >
           {filledFloors.map(({ floor, rooms }) => (
@@ -94,7 +91,7 @@ export function FloorPlan({
           ))}
         </div>
       </div>
-      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4">
+      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4 hidden">
         <DebugSlider
           label="Translate X"
           value={translateX}
@@ -172,6 +169,18 @@ export function FloorPlan({
         floors={availableFloors}
         handleFloor={handleClick}
       />
+      <span className="absolute p-2 text-black">
+        <p>
+          {curFloor}. Et {floorLabel?.label ? `(${floorLabel.label})` : ""}
+        </p>
+      </span>
+      <span className="absolute p-2 bottom-0 text-black">
+        <ViewModeSelect
+          value={viewMode}
+          options={["2D", "3D"]}
+          onChange={(mode) => handleClick(curFloor, curRoom, mode)}
+        />
+      </span>
     </div>
   );
 }

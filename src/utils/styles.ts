@@ -23,11 +23,19 @@ interface Props {
 }
 
 
-export function generateFloorStyles({ floor, curFloor, maxFloors, mode, overrides }: Props): CSSProperties {
+export function generateFloorStyles({ floor, curFloor, mode, overrides }: Props): CSSProperties {
 	// Base calculations
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
 	const curve = Math.pow(delta, 0.2)
+
+	if (mode === "2D") return {
+		opacity: delta === 0 ? 1 : 0,
+		pointerEvents: delta === 0 ? "auto" : "none",
+		height: "100%",
+		width: "100%",
+		left: 0
+	}
 
 	return {
 		transform: `
@@ -40,6 +48,9 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, mode, override
 		`,
 		zIndex: 100 - delta,
 		opacity: delta > 0 ? 0.3 : 1,
-		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : ""
+		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : "",
+		height: "110%",
+		width: "80%",
+		left: "15%"
 	}
 }
