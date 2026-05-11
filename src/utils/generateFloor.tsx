@@ -1,5 +1,5 @@
 import { type Room } from "@/types/Rooms";
-import { ComponentProps } from "react";
+import { ComponentProps, MouseEvent } from "react";
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
   floor: number;
@@ -16,15 +16,26 @@ export function GenerateFloor({
   handleClick,
   ...props
 }: FloorProps) {
+  function updateCurrent(event: MouseEvent<SVGSVGElement>) {
+    const targetElement = event.target;
+    let roomID = "";
+
+    if (targetElement instanceof SVGPolygonElement) {
+      roomID = targetElement.id;
+    }
+
+    handleClick(floor, roomID);
+  }
+
   return (
     <svg
       viewBox="0 0 800 500"
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill="white"
       stroke="black"
       strokeWidth="2"
       {...props}
-      onClick={() => handleClick(floor, "")}
+      onClick={updateCurrent}
     >
       {/**Outer shape (L building)*/}
       <path d="M50 50 H300 V250 H700 V450 H50 Z"></path>
@@ -45,7 +56,6 @@ export function GenerateFloor({
             ${room.id === curRoom && floor === curFloor ? "fill-red-300" : ""}
             ${room.type === "bathroom" ? "fill-green-100 hover:fill-green-300" : ""}
           `}
-          onClick={() => handleClick(floor, room.id)}
         />
       ))}
 
