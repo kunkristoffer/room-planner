@@ -42,8 +42,10 @@ export function FloorPlan({
   const [distance, setDistance] = useState(2000);
 
   // Calculations
-  const floorNumbers = Object.keys(floors).map((floor) => Number(floor));
+  const floorNumbers = floors.map((floor) => floor.floor);
   const allFloors = fillFloorNumbers(floorNumbers);
+
+  console.log(floorNumbers, allFloors);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
@@ -57,19 +59,19 @@ export function FloorPlan({
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
-          {Object.values(floors).map((floor, i, arr) => (
+          {allFloors.map((floor) => (
             <GenerateFloor
-              key={i}
-              floor={i}
+              key={floor}
+              floor={floor}
               curFloor={curFloor}
               curRoom={curRoom}
-              rooms={floor}
-              className={`absolute ${curFloor === i ? "" : ""} transition-all duration-1000`}
+              rooms={floors[floor]?.rooms ?? []}
+              className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000`}
               handleClick={handleClick}
               style={generateFloorStyles({
-                floor: i,
+                floor,
                 curFloor: curFloor,
-                maxFloors: arr.length,
+                maxFloors: allFloors.length,
                 mode: viewMode,
                 overrides: {
                   transform: {
