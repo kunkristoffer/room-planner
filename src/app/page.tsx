@@ -5,16 +5,21 @@ import { useState } from "react";
 import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import { floors } from "@/data/floors";
+import { ViewMode } from "@/utils/styles";
 
 export default function Home() {
+  const [viewMode, setViewMode] = useState<ViewMode>("3D");
   const [floor, setFloor] = useState(0);
   const [room, setRoom] = useState<string>("");
 
-  function handleClick(newFloor: number, id: string) {
+  function handleClick(newFloor: number, id: string, mode?: ViewMode) {
     console.log(`Setting > floor: ${newFloor}, room: ${id}`);
 
     setRoom(id);
     setFloor(newFloor);
+    if (mode) {
+      setViewMode(mode);
+    }
   }
 
   return (
@@ -65,6 +70,7 @@ export default function Home() {
               curFloor={floor}
               curRoom={room}
               floors={floors}
+              viewMode={viewMode}
               handleClick={handleClick}
             />
           </div>

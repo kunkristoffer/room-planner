@@ -11,7 +11,8 @@ interface FloorPlanProps {
   curFloor: number;
   curRoom: string;
   floors: FloorProp[];
-  handleClick: (floor: number, id: string) => void;
+  viewMode: ViewMode;
+  handleClick: (floor: number, id: string, mode?: ViewMode) => void;
 }
 
 /** Notes:
@@ -22,11 +23,9 @@ export function FloorPlan({
   curFloor,
   curRoom,
   floors,
+  viewMode,
   handleClick,
 }: FloorPlanProps) {
-  // Mode select
-  const [viewMode, setViewMode] = useState<ViewMode>("3D");
-
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
@@ -47,7 +46,7 @@ export function FloorPlan({
   const floorLabel = filledFloors.find((floor) => floor.floor === curFloor);
 
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white">
+    <div className="relative size-full flex flex-row! gap-2 bg-white overflow-hidden rounded-lg">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
@@ -92,7 +91,7 @@ export function FloorPlan({
           ))}
         </div>
       </div>
-      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4">
+      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4 hidden">
         <DebugSlider
           label="Translate X"
           value={translateX}
@@ -179,7 +178,7 @@ export function FloorPlan({
         <ViewModeSelect
           value={viewMode}
           options={["2D", "3D"]}
-          onChange={(mode) => setViewMode(mode)}
+          onChange={(mode) => handleClick(curFloor, curRoom, mode)}
         />
       </span>
     </div>
