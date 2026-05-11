@@ -40,6 +40,6 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, mode, override
 		`,
 		zIndex: 100 - delta,
 		opacity: delta > 0 ? 0.3 : 1,
-		backgroundColor: floor === curFloor ? "rgba(0,0,0,0.1)" : ""
+		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : ""
 	}
 }
