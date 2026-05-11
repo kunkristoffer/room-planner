@@ -53,7 +53,7 @@ export function FloorPlan({
         style={{ perspective: `${distance}px` }}
       >
         <div
-          className="relative transform-3d h-[50svw]"
+          className="relative transform-3d"
           style={{
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
@@ -65,7 +65,7 @@ export function FloorPlan({
               curFloor={curFloor}
               curRoom={curRoom}
               rooms={rooms}
-              className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000`}
+              className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000 hover:bg-gray-900/30`}
               handleClick={handleClick}
               style={generateFloorStyles({
                 floor,
