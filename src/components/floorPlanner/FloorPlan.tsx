@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 import { FloorProp } from "@/types/Rooms";
-import { GenerateFloor } from "@/data/generateFloor";
+import { GenerateFloor } from "@/utils/generateFloor";
 import { fillFloorNumbers } from "@/utils/misc";
 
 interface FloorPlanProps {
