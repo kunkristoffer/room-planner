@@ -5,6 +5,7 @@ import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 import { FloorProp } from "@/types/Rooms";
 import { GenerateFloor } from "@/data/generateFloor";
+import { fillFloorNumbers } from "@/utils/misc";
 
 interface FloorPlanProps {
   curFloor: number;
@@ -39,6 +40,10 @@ export function FloorPlan({
   const [rotateViewY, setRotateViewY] = useState(5);
   const [rotateViewZ, setRotateViewZ] = useState(18);
   const [distance, setDistance] = useState(2000);
+
+  // Calculations
+  const floorNumbers = Object.keys(floors).map((floor) => Number(floor));
+  const allFloors = fillFloorNumbers(floorNumbers);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
@@ -158,7 +163,7 @@ export function FloorPlan({
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={floors}
+        floors={allFloors}
         handleFloor={handleClick}
       />
     </div>
