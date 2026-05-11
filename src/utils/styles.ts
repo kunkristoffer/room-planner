@@ -31,6 +31,7 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides }: Props)
 
 	if (mode === "2D") return {
 		opacity: delta === 0 ? 1 : 0,
+		pointerEvents: delta === 0 ? "auto" : "none",
 		height: "100%",
 		width: "100%",
 		left: 0
