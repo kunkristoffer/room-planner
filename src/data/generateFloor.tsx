@@ -1,46 +1,21 @@
+import { type Room } from "@/types/Rooms";
 import { ComponentProps } from "react";
-
-type RoomType = "room" | "bathroom";
-type Coordinate = { x: number; y: number };
-type Door = "left" | "right" | "double" | "sliding";
-
-interface Room {
-  id: string;
-  type: RoomType;
-  points: Coordinate[];
-  doors: (Coordinate & { angle: number; type?: Door })[];
-  windows?: (Coordinate & { angle: number; width?: number })[];
-  wallThickness?: number;
-}
-
 interface FloorProps extends ComponentProps<"svg"> {
+  rooms: Room[];
   floor: number;
   curFloor: number;
   curRoom: string;
   handleClick: (floor: number, id: string) => void;
 }
 
-export function Floor1({
+export function GenerateFloor({
   curFloor,
   curRoom,
   floor,
+  rooms,
   handleClick,
   ...props
 }: FloorProps) {
-  const rooms: Room[] = [
-    {
-      id: "room-1",
-      type: "room",
-      points: [
-        { x: 0, y: 0 },
-        { x: 10, y: 10 },
-      ],
-      doors: [{ x: 2, y: 3, angle: 90, type: "left" }],
-      windows: [{ x: 10, y: 5, angle: 90 }],
-      wallThickness: 10,
-    },
-  ];
-
   return (
     <svg
       viewBox="0 0 800 500"

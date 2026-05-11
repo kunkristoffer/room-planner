@@ -3,10 +3,12 @@ import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
+import { FloorProp } from "@/types/Rooms";
 
 interface FloorPlanProps {
   curFloor: number;
   curRoom: string;
+  floors: FloorProp;
   handleClick: (floor: number, id: string) => void;
 }
 
@@ -14,9 +16,12 @@ interface FloorPlanProps {
  * Needs two views: top-down and angled, needs to be stored in state
  */
 
-export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
-  const floors = Array.from({ length: 10 }, (_, i) => i);
-
+export function FloorPlan({
+  curFloor,
+  curRoom,
+  floors,
+  handleClick,
+}: FloorPlanProps) {
   // Mode select
   const [viewMode, setViewMode] = useState<ViewMode>("3D");
 
@@ -46,7 +51,7 @@ export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
-          {floors.map((_, i) => (
+          {Object.values(floors).map((_, i, arr) => (
             <Floor1
               key={i}
               floor={i}
@@ -57,7 +62,7 @@ export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
               style={generateFloorStyles({
                 floor: i,
                 curFloor: curFloor,
-                maxFloors: floors.length,
+                maxFloors: arr.length,
                 mode: viewMode,
                 overrides: {
                   transform: {
