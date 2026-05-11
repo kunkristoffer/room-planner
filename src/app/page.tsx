@@ -2,8 +2,9 @@ import Image from "next/image";
 import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import { floors } from "@/data/floors";
+import { Suspense } from "react";
 
-export default async function Home() {
+export default function Home() {
   return (
     <main className="flex-1 container mx-auto flex flex-col gap-4">
       <div className="relative aspect-3/1 rounded-md overflow-hidden mb-12">
@@ -48,7 +49,9 @@ export default async function Home() {
             </p>
           </div>
           <div className="flex flex-col gap-4 aspect-video w-full rounded-md">
-            <FloorPlan floors={floors} />
+            <Suspense>
+              <FloorPlan floors={floors} />
+            </Suspense>
           </div>
           <div className="flex flex-col gap-4">
             <p>
@@ -101,7 +104,9 @@ export default async function Home() {
             </span>
           </div>
           <div className="border rounded-md p-4">
-            <FloorDetails />
+            <Suspense>
+              <FloorDetails />
+            </Suspense>
           </div>
         </div>
       </div>
