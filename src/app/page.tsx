@@ -1,25 +1,37 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import { floors } from "@/data/floors";
 import { ViewMode } from "@/utils/styles";
 
 export default function Home() {
-  const [viewMode, setViewMode] = useState<ViewMode>("3D");
-  const [floor, setFloor] = useState(0);
-  const [room, setRoom] = useState<string>("");
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+  const router = useRouter();
+
+  const viewMode = (searchParams.get("view") as ViewMode) ?? "3D";
+  const floor = Number(searchParams.get("floor")) ?? "1";
+  const room = searchParams.get("room") ?? "";
 
   function handleClick(newFloor: number, id: string, mode?: ViewMode) {
-    console.log(`Setting > floor: ${newFloor}, room: ${id}`);
+    const params = new URLSearchParams(searchParams);
 
-    setRoom(id);
-    setFloor(newFloor);
-    if (mode) {
-      setViewMode(mode);
+    params.set("floor", String(newFloor));
+
+    if (id) {
+      params.set("room", id);
+    } else {
+      params.delete("room");
     }
+
+    if (mode) {
+      params.set("view", mode);
+    }
+
+    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   }
 
   return (
