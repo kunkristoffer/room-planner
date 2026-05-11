@@ -4,6 +4,7 @@ type Door = "left" | "right" | "double" | "sliding";
 
 export interface Room {
     id: string;
+    label?: string
     type: RoomType;
     points: Coordinate[];
     doors: (Coordinate & { angle: number; type?: Door })[];
@@ -11,4 +12,4 @@ export interface Room {
     wallThickness?: number;
 }
 
-export type FloorProp = { floor: number, rooms: Room[] }
+export type FloorProp = { floor: number, label?: string, rooms: Room[] }
