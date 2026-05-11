@@ -10,7 +10,7 @@ import { fillFloorNumbers } from "@/utils/misc";
 interface FloorPlanProps {
   curFloor: number;
   curRoom: string;
-  floors: FloorProp;
+  floors: FloorProp[];
   handleClick: (floor: number, id: string) => void;
 }
 
@@ -42,10 +42,7 @@ export function FloorPlan({
   const [distance, setDistance] = useState(2000);
 
   // Calculations
-  const floorNumbers = floors.map((floor) => floor.floor);
-  const allFloors = fillFloorNumbers(floorNumbers);
-
-  console.log(floorNumbers, allFloors);
+  const filledFloors = fillFloorNumbers(floors);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
@@ -59,19 +56,19 @@ export function FloorPlan({
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
-          {allFloors.map((floor) => (
+          {filledFloors.map(({ floor, rooms }) => (
             <GenerateFloor
               key={floor}
               floor={floor}
               curFloor={curFloor}
               curRoom={curRoom}
-              rooms={floors[floor]?.rooms ?? []}
+              rooms={rooms}
               className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000`}
               handleClick={handleClick}
               style={generateFloorStyles({
                 floor,
                 curFloor: curFloor,
-                maxFloors: allFloors.length,
+                maxFloors: filledFloors.length,
                 mode: viewMode,
                 overrides: {
                   transform: {
@@ -165,7 +162,7 @@ export function FloorPlan({
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={allFloors}
+        floors={filledFloors}
         handleFloor={handleClick}
       />
     </div>

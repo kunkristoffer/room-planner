@@ -11,4 +11,4 @@ export interface Room {
     wallThickness?: number;
 }
 
-export type FloorProp = { floor: number, rooms: Room[] }[]
+export type FloorProp = { floor: number, rooms: Room[] }

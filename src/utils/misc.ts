@@ -1,12 +1,19 @@
+import { FloorProp } from "@/types/Rooms";
+
 /** Calculate the delta (difference) */
 export function getDelta(val: number, length: number) {
     return Math.abs(val - length);
 }
 
 /** Fills inn missing numbers in an array, used for generating a full floor list based on missing entryes */
-export function fillFloorNumbers(floors: number[]) {
-    const min = Math.min(...floors)
-    const max = Math.max(...floors)
+export function fillFloorNumbers(floors: FloorProp[]) {
+    const floorNumbers = floors.map(floor => floor.floor)
+    const min = Math.min(...floorNumbers)
+    const max = Math.max(...floorNumbers)
 
-    return Array.from({ length: max - min + 1 }, (_, i) => min + i)
+    const missingFloors = Array.from({ length: max - min + 1 }, (_, i) => ({ floor: min + i, rooms: [] }) as FloorProp).filter(floor => !floorNumbers.includes(floor.floor))
+    console.log(missingFloors);
+
+
+    return [...floors, ...missingFloors]
 }

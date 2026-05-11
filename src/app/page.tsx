@@ -10,7 +10,7 @@ export default function Home() {
   const [floor, setFloor] = useState(0);
   const [room, setRoom] = useState<string>("");
 
-  const floors: FloorProp = [
+  const floors: FloorProp[] = [
     {
       floor: -1,
       rooms: [
@@ -68,7 +68,7 @@ export default function Home() {
   ];
 
   function handleClick(newFloor: number, id: string) {
-    console.log(newFloor, id);
+    console.log(`Setting > floor: ${newFloor}, room: ${id}`);
 
     setRoom(id);
     setFloor(newFloor);
