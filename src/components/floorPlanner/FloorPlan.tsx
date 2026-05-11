@@ -3,10 +3,14 @@ import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
+import { FloorProp } from "@/types/Rooms";
+import { GenerateFloor } from "@/utils/generateFloor";
+import { fillFloorNumbers } from "@/utils/misc";
 
 interface FloorPlanProps {
   curFloor: number;
   curRoom: string;
+  floors: FloorProp[];
   handleClick: (floor: number, id: string) => void;
 }
 
@@ -14,9 +18,12 @@ interface FloorPlanProps {
  * Needs two views: top-down and angled, needs to be stored in state
  */
 
-export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
-  const floors = Array.from({ length: 10 }, (_, i) => i);
-
+export function FloorPlan({
+  curFloor,
+  curRoom,
+  floors,
+  handleClick,
+}: FloorPlanProps) {
   // Mode select
   const [viewMode, setViewMode] = useState<ViewMode>("3D");
 
@@ -29,35 +36,46 @@ export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
   const [rotateZ, setRotateZ] = useState(0);
 
   // Transform container
-  const [rotateViewX, setRotateViewX] = useState(67);
+  const [rotateViewX, setRotateViewX] = useState(65);
   const [rotateViewY, setRotateViewY] = useState(5);
-  const [rotateViewZ, setRotateViewZ] = useState(18);
+  const [rotateViewZ, setRotateViewZ] = useState(10);
   const [distance, setDistance] = useState(2000);
+
+  // Calculations
+  const availableFloors = floors.map((floor) => floor.floor);
+  const filledFloors = fillFloorNumbers(floors);
+  const floorLabel = filledFloors.find((floor) => floor.floor === curFloor);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
+      <span className="absolute p-2 text-black">
+        <p>
+          {curFloor}. Et {floorLabel?.label ? `(${floorLabel.label})` : ""}
+        </p>
+      </span>
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
       >
         <div
-          className="relative transform-3d h-[50svw]"
+          className="relative transform-3d h-full w-full"
           style={{
             transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
-          {floors.map((_, i) => (
-            <Floor1
-              key={i}
-              floor={i}
+          {filledFloors.map(({ floor, rooms }) => (
+            <GenerateFloor
+              key={floor}
+              floor={floor}
               curFloor={curFloor}
               curRoom={curRoom}
-              className={`absolute ${curFloor === i ? "" : ""} transition-all duration-1000`}
+              rooms={rooms}
+              className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000 hover:bg-gray-900/30`}
               handleClick={handleClick}
               style={generateFloorStyles({
-                floor: i,
+                floor,
                 curFloor: curFloor,
-                maxFloors: floors.length,
+                maxFloors: filledFloors.length,
                 mode: viewMode,
                 overrides: {
                   transform: {
@@ -151,7 +169,7 @@ export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={floors}
+        floors={availableFloors}
         handleFloor={handleClick}
       />
     </div>

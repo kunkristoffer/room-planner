@@ -1,16 +1,17 @@
 "use client";
 
-import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
-import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import Image from "next/image";
 import { useState } from "react";
+import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
+import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
+import { floors } from "@/data/floors";
 
 export default function Home() {
   const [floor, setFloor] = useState(0);
   const [room, setRoom] = useState<string>("");
 
   function handleClick(newFloor: number, id: string) {
-    console.log(newFloor, id);
+    console.log(`Setting > floor: ${newFloor}, room: ${id}`);
 
     setRoom(id);
     setFloor(newFloor);
@@ -63,6 +64,7 @@ export default function Home() {
             <FloorPlan
               curFloor={floor}
               curRoom={room}
+              floors={floors}
               handleClick={handleClick}
             />
           </div>
