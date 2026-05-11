@@ -47,6 +47,7 @@ export function FloorPlan({
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white">
+      <span className="absolute p-2 text-black">Floor: {curFloor}</span>
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
