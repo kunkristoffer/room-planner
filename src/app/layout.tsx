@@ -27,7 +27,26 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <header className="bg-foreground p-4 text-lg">
+          <div className="container mx-auto flex justify-between gap-4">
+            <span>logo</span>
+            <span className="flex justify-center gap-4">
+              <p>Program</p>
+              <p>Min Side</p>
+            </span>
+            <span>Fornavn Etternavn</span>
+          </div>
+        </header>
+        <div className="container mx-auto flex justify-between p-4 text-sm">
+          <p>Home / Event title</p>
+          <span className="flex gap-4">
+            <p>Forrige</p>
+            <b>Neste</b>
+          </span>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

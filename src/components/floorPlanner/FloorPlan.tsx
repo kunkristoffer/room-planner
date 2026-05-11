@@ -1,167 +1,156 @@
 import { Floor1 } from "@/data/loadFloors";
-import { FloorNumberSlider } from "../ui/sliders/FloorNumber";
+import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { useState } from "react";
+import { DebugSlider } from "../ui/inputs/DebugSlider";
+import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 
 interface FloorPlanProps {
-  floor: number;
-  room: string;
-  handleClick: (id: string, type: "floor" | "room") => void;
+  curFloor: number;
+  curRoom: string;
+  handleClick: (floor: number, id: string) => void;
 }
 
 /** Notes:
  * Needs two views: top-down and angled, needs to be stored in state
  */
 
-export function FloorPlan({ floor, handleClick }: FloorPlanProps) {
+export function FloorPlan({ curFloor, curRoom, handleClick }: FloorPlanProps) {
   const floors = Array.from({ length: 10 }, (_, i) => i);
 
+  // Mode select
+  const [viewMode, setViewMode] = useState<ViewMode>("3D");
+
   // Transform svgs
-  const [transformX, setTransformX] = useState(0);
-  const [transformY, setTransformY] = useState(250);
-  const [transformZ, setTransformZ] = useState(250);
+  const [translateX, settranslateX] = useState(-10);
+  const [translateY, settranslateY] = useState(0);
+  const [translateZ, settranslateZ] = useState(130);
+  const [rotateX, setRotateX] = useState(-5);
+  const [rotateY, setRotateY] = useState(0);
+  const [rotateZ, setRotateZ] = useState(0);
 
   // Transform container
-  const [rotateX, setRotateX] = useState(70);
-  const [rotateY, setRotateY] = useState(0);
-  const [rotateZ, setRotateZ] = useState(25);
-
-  function offset(i: number) {
-    return i - floor;
-  }
-
-  function getOpacity(
-    index: number,
-    selectedIndex: number,
-    maxDistance: number,
-  ) {
-    const distance = Math.abs(index - selectedIndex);
-
-    const minOpacity = 0;
-    const maxOpacity = 0.9;
-
-    const normalized = Math.min(distance / maxDistance, 1);
-
-    // Ease-out curve (fast increase, slow towards max)
-    const eased = 1 - Math.pow(normalized, 2);
-
-    return minOpacity + (maxOpacity - minOpacity) * eased;
-  }
+  const [rotateViewX, setRotateViewX] = useState(67);
+  const [rotateViewY, setRotateViewY] = useState(5);
+  const [rotateViewZ, setRotateViewZ] = useState(18);
+  const [distance, setDistance] = useState(2000);
 
   return (
-    <div className="flex flex-row! gap-2 bg-white overflow-clip">
-      <div className="perspective-distantes flex-1">
+    <div className="relative size-full flex flex-row! gap-2 bg-white">
+      <div
+        className="perspective-origin-center perspective-distant flex-1"
+        style={{ perspective: `${distance}px` }}
+      >
         <div
           className="relative transform-3d h-[50svw]"
           style={{
-            transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`,
+            transform: `rotateX(${rotateViewX}deg) rotateY(${rotateViewY}deg) rotateZ(${rotateViewZ}deg)`,
           }}
         >
           {floors.map((_, i) => (
             <Floor1
               key={i}
-              data-floor={i}
-              className={`absolute ${floor === i ? "" : ""}`}
-              style={{
-                transform: `
-                  translateX(${offset(i) * transformX}px)
-                  translateY(${offset(i) * transformY}px)
-                  translateZ(${offset(i) * transformZ}px)
-                `,
-                opacity: getOpacity(i, floor, floors.length),
-                // zIndex: 100 - Math.abs(offset(i)),
-              }}
+              floor={i}
+              curFloor={curFloor}
+              curRoom={curRoom}
+              className={`absolute ${curFloor === i ? "" : ""} transition-all duration-1000`}
+              handleClick={handleClick}
+              style={generateFloorStyles({
+                floor: i,
+                curFloor: curFloor,
+                maxFloors: floors.length,
+                mode: viewMode,
+                overrides: {
+                  transform: {
+                    x: translateX,
+                    y: translateY,
+                    z: translateZ,
+                  },
+                  rotate: {
+                    x: rotateX,
+                    y: rotateY,
+                    z: rotateZ,
+                  },
+                },
+              })}
             />
           ))}
-
-          {/* {floors.map((item, i) => (
-            
-            <Image
-              key={i}
-              src={item}
-              alt={`Image of floor ${i + 1}`}
-              className="absolute origin-center inset-0 w-full"
-              style={{
-                backgroundColor: floor === i ? "red" : "",
-                transform: `
-                  translateZ(${Math.abs(floor - i) * 40}px)
-                  translateY(${Math.abs(floor - i) - 20}px)
-                  scale(${1 - Math.abs(getOffset(i)) * 0.05})
-                `,
-                opacity: floors.length / Math.abs(floor - i),
-                zIndex: 100 - Math.abs(getOffset(i)),
-              }}
-              width={800}
-              height={400}
-              unoptimized
-              loading="eager"
-            />
-          ))} */}
         </div>
       </div>
-      <div className="text-black z-50">
-        <label>
-          <p>Transform X - {transformX}</p>
-          <input
-            type="range"
-            value={transformX}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformX(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Transform Y - {transformY}</p>
-          <input
-            type="range"
-            value={transformY}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformY(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Transform Z - {transformZ}</p>
-          <input
-            type="range"
-            value={transformZ}
-            min={0}
-            max={500}
-            onChange={(e) => setTransformZ(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate X - {rotateX}</p>
-          <input
-            type="range"
-            value={rotateX}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateX(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate Y - {rotateY}</p>
-          <input
-            type="range"
-            value={rotateY}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateY(e.currentTarget.valueAsNumber)}
-          />
-        </label>
-        <label>
-          <p>Rotate Z - {rotateZ}</p>
-          <input
-            type="range"
-            value={rotateZ}
-            min={-360}
-            max={360}
-            onChange={(e) => setRotateZ(e.currentTarget.valueAsNumber)}
-          />
-        </label>
+      <div className="absolute right-0 flex flex-col gap-2 text-black z-50 w-36 p-4">
+        <DebugSlider
+          label="Translate X"
+          value={translateX}
+          min={-500}
+          max={500}
+          onChange={(val) => settranslateX(val)}
+        />
+        <DebugSlider
+          label="Translate Y"
+          value={translateY}
+          min={-500}
+          max={500}
+          onChange={(val) => settranslateY(val)}
+        />
+        <DebugSlider
+          label="Translate Z"
+          value={translateZ}
+          min={-500}
+          max={500}
+          onChange={(val) => settranslateZ(val)}
+        />
+        <DebugSlider
+          label="Rotate X"
+          value={rotateX}
+          min={-360}
+          max={360}
+          onChange={(val) => setRotateX(val)}
+        />
+        <DebugSlider
+          label="Rotate Y"
+          value={rotateY}
+          min={-360}
+          max={360}
+          onChange={(val) => setRotateY(val)}
+        />
+        <DebugSlider
+          label="Rotate Z"
+          value={rotateZ}
+          min={-360}
+          max={360}
+          onChange={(val) => setRotateZ(val)}
+        />
+        <hr />
+        <DebugSlider
+          label="Rotate X"
+          value={rotateViewX}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewX(val)}
+        />
+        <DebugSlider
+          label="Rotate Y"
+          value={rotateViewY}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewY(val)}
+        />
+        <DebugSlider
+          label="Rotate Z"
+          value={rotateViewZ}
+          min={0}
+          max={360}
+          onChange={(val) => setRotateViewZ(val)}
+        />
+        <DebugSlider
+          label="Distance"
+          value={distance}
+          min={0}
+          max={5000}
+          onChange={(val) => setDistance(val)}
+        />
       </div>
       <FloorNumberSlider
-        floor={floor}
+        floor={curFloor}
         floors={floors}
         handleFloor={handleClick}
       />
