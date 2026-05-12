@@ -12,6 +12,7 @@ import { GenerateFloor } from "@/utils/generateFloor";
 import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { ViewModeSelect } from "../ui/inputs/ViewMode";
+import { FloorSlider } from "../ui/inputs/FloorSlider";
 
 interface FloorPlanProps {
   floors: FloorProp[];
@@ -61,8 +62,9 @@ export function FloorPlan({ floors }: FloorPlanProps) {
 
   // Calculations
   const availableFloors = floors.map((floor) => floor.floor);
-  const filledFloors = fillFloorNumbers(floors);
-  const floorLabel = filledFloors.find((floor) => floor.floor === curFloor);
+  const floorsFilled = fillFloorNumbers(floors);
+  const floorNumbers = floorsFilled.map((floor) => floor.floor);
+  const floorLabel = floorsFilled.find((floor) => floor.floor === curFloor);
 
   return (
     <div className="relative size-full flex flex-row! gap-2 bg-white overflow-hidden rounded-lg">
@@ -79,7 +81,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
                 : "",
           }}
         >
-          {filledFloors.map(({ floor, rooms }) => (
+          {floorsFilled.map(({ floor, rooms }) => (
             <GenerateFloor
               key={floor}
               floor={floor}
@@ -91,7 +93,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
               style={generateFloorStyles({
                 floor,
                 curFloor: curFloor,
-                maxFloors: filledFloors.length,
+                maxFloors: floorsFilled.length,
                 mode: viewMode,
                 overrides: {
                   transform: {
@@ -183,11 +185,19 @@ export function FloorPlan({ floors }: FloorPlanProps) {
           onChange={(val) => setDistance(val)}
         />
       </div>
-      <FloorNumberSlider
+      {/* <FloorNumberSlider
         floor={curFloor}
         floors={availableFloors}
         handleFloor={handleClick}
-      />
+      /> */}
+      <div className="absolute left-5 top-1/2 -translate-y-1/2">
+        <FloorSlider
+          curFloor={curFloor}
+          availableFloors={availableFloors}
+          floors={floorNumbers}
+          onChange={handleClick}
+        />
+      </div>
       <span className="absolute p-2 text-black">
         <p>
           {curFloor}. Et {floorLabel?.label ? `(${floorLabel.label})` : ""}
