@@ -27,8 +27,21 @@ export function FloorSlider({
   const maxFloor = Math.max(...floors);
   const floorRange = floors.length;
 
-  function getTrackPosition(floor: number, range: number) {
-    return (range / 100) * floor;
+  //console.log(curFloor, availableFloors, floors, floorRange);
+
+  function getPercentFromFloor(floor: number, min: number, range: number) {
+    const percent = ((floor - min + 1) / range) * 100;
+    return 100 - percent;
+  }
+
+  function getFloorFromPercent(
+    percent: number,
+    range: number,
+    available: number[],
+  ) {
+    console.log(percent, available, range);
+
+    return 2;
   }
 
   function getClosestAvailableFloor(floor: number, avilable: number[]) {}
@@ -44,11 +57,15 @@ export function FloorSlider({
         Math.max((relativeHeight / containerSize.height) * 100, 0),
         100,
       );
-      console.log(relativeToPercent);
 
-      // Calculate which floor is closest
-      const floor = 2;
-      onChange(floor, "", "3D");
+      const floor = getFloorFromPercent(
+        relativeToPercent,
+        floors.length,
+        availableFloors,
+      );
+      if (floor !== curFloor) {
+        //onChange(floor, "", "3D");
+      }
     }
 
     function handleRelease() {
@@ -73,7 +90,9 @@ export function FloorSlider({
       <button
         type="button"
         className="absolute left-1/2 -translate-x-1/2 size-6 bg-blue-600 rounded-full active:bg-blue-500"
-        style={{ top: `${getTrackPosition(curFloor, floorRange)}%` }}
+        style={{
+          top: `${getPercentFromFloor(curFloor, minFloor, floorRange)}%`,
+        }}
         onPointerDown={() => setIsDraging(true)}
       ></button>
     </div>
