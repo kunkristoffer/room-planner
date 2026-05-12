@@ -95,7 +95,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   }, []);
 
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white rounded-lg overflow-hidden">
+    <div className="relative flex-1 flex flex-row! gap-2 bg-white rounded-lg overflow-hidden">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
