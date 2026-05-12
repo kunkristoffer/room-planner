@@ -1,6 +1,5 @@
-import { RoomType, type Room } from "@/types/Rooms";
+import type { RoomType, Room, ViewMode } from "@/types/Rooms";
 import { ComponentProps, MouseEvent } from "react";
-import { ViewMode } from "./styles";
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
   floor: number;
@@ -59,9 +58,31 @@ export function GenerateFloor({
       {/**Outer shape (L building)*/}
       <path d="M0 0 H325 V375 H850 V675 H0 Z"></path>
 
-      {/* Hallways */}
-      {/* <rect x={200} y={50} width={100} height={200} fill="white" />
-      <rect x={200} y={200} width={500} height={100} fill="white" /> */}
+      {/* Legend */}
+      <g
+        className={`${curFloor === floor ? "opacity-100" : "opacity-0"} duration-1000`}
+      >
+        <rect
+          x={400}
+          y={0}
+          width={100}
+          height={100}
+          className="fill-blue-100"
+        />
+        <text x="525" y="50" className="text-2xl fill">
+          Heis
+        </text>
+        <rect
+          x={400}
+          y={125}
+          width={100}
+          height={100}
+          className="fill-purple-100"
+        />
+        <text x="525" y="175" className="text-2xl fill">
+          Rom
+        </text>
+      </g>
 
       {/* Rooms */}
       {rooms.map((room) => (
