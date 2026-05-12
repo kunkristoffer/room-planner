@@ -7,6 +7,10 @@ interface Props {
 	curFloor: number
 	maxFloors: number
 	mode: ViewMode
+	containerSize: {
+		height: number
+		width: number
+	}
 	overrides?: {
 		transform?: {
 			x?: number
@@ -23,7 +27,19 @@ interface Props {
 }
 
 
-export function generateFloorStyles({ floor, curFloor, mode, overrides }: Props): CSSProperties {
+export function generateFloorStyles({ floor, curFloor, mode, overrides, containerSize }: Props): CSSProperties {
+	// Setting overrides
+	const transform = {
+		x: overrides?.transform?.x || 0,
+		y: overrides?.transform?.y || 0,
+		z: overrides?.transform?.z || 0,
+	}
+	const rotate = {
+		x: overrides?.rotate?.x || 0,
+		y: overrides?.rotate?.y || 0,
+		z: overrides?.rotate?.z || 0,
+	}
+
 	// Base calculations
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
@@ -39,17 +55,17 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides }: Props)
 
 	return {
 		transform: `
-			translateX(${(overrides?.transform?.x || 0)}px)
-			translateY(${postition * -curve * (overrides?.transform?.y || 0)}px)
-			translateZ(${postition * (overrides?.transform?.z || 0)}px)
-			rotateX(${postition * -curve * (overrides?.rotate?.x || 0)}deg)
-			rotateY(${1 * (overrides?.rotate?.y || 0)}deg)
-			rotateZ(${1 * (overrides?.rotate?.z || 0)}deg)
+			translateX(${transform.x}px)
+			translateY(${postition * -curve * transform.y}px)
+			translateZ(${postition * transform.z}px)
+			rotateX(${postition * -curve * rotate.x}deg)
+			rotateY(${rotate.y}deg)
+			rotateZ(${rotate.z}deg)
 		`,
 		zIndex: 100 - delta,
 		opacity: delta > 0 ? 0.3 : 1,
 		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : "",
-		height: "110%",
+		height: "100%",
 		width: "80%",
 		left: "15%"
 	}
