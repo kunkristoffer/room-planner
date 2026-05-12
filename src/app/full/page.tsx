@@ -7,11 +7,11 @@ export default function Page() {
   return (
     <main className="flex-1 container mx-auto flex flex-col gap-8 p-4">
       <Suspense>
-        <div className="aspect-square">
+        <div className="aspect-video">
           <FloorPlan floors={floors} />
         </div>
         <div>
-            <FloorDetails />
+          <FloorDetails />
         </div>
       </Suspense>
     </main>
