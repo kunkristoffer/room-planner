@@ -69,7 +69,7 @@ export const floors: FloorProp[] = [
         ],
     }, {
         floor: 5,
-        label: "test",
+        label: "Mini-con",
         rooms: [
             {
                 id: "room-1",
@@ -260,7 +260,7 @@ export const floors: FloorProp[] = [
         ],
     }, {
         floor: 6,
-        label: "test",
+        label: "Hoved område",
         rooms: [
             {
                 id: "room-1",
