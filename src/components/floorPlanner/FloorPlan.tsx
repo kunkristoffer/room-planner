@@ -192,19 +192,19 @@ export function FloorPlan({ floors }: FloorPlanProps) {
           onChange={(val) => setDistance(val)}
         />
       </div>
-      {/* <FloorNumberSlider
+      <FloorNumberSlider
         floor={curFloor}
         floors={availableFloors}
         handleFloor={handleClick}
-      /> */}
-      <div className="absolute left-5 top-1/2 -translate-y-1/2">
+      />
+      {/* <div className="absolute left-5 top-1/2 -translate-y-1/2">
         <FloorSlider
           curFloor={curFloor}
           availableFloors={availableFloors}
           floors={floorNumbers}
           onChange={handleClick}
         />
-      </div>
+      </div> */}
       <span className="absolute p-2 text-black">
         <p>
           {curFloor}. Et {floorLabel?.label ? `(${floorLabel.label})` : ""}
