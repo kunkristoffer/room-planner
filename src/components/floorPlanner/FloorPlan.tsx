@@ -64,14 +64,14 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
   const [translateZ, settranslateZ] = useState(35);
-  const [rotateX, setRotateX] = useState(-5);
+  const [rotateX, setRotateX] = useState(15);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
 
   // Transform container
-  const [rotateViewX, setRotateViewX] = useState(65);
-  const [rotateViewY, setRotateViewY] = useState(5);
-  const [rotateViewZ, setRotateViewZ] = useState(10);
+  const [rotateViewX, setRotateViewX] = useState(60);
+  const [rotateViewY, setRotateViewY] = useState(0);
+  const [rotateViewZ, setRotateViewZ] = useState(15);
   const [distance, setDistance] = useState(2000);
 
   // Calculations

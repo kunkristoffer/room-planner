@@ -27,7 +27,7 @@ interface Props {
 }
 
 
-export function generateFloorStyles({ floor, curFloor, mode, overrides, containerSize }: Props): CSSProperties {
+export function generateFloorStyles({ floor, curFloor, maxFloors, containerSize, mode, overrides }: Props): CSSProperties {
 	// Setting overrides
 	const transform = {
 		x: overrides?.transform?.x || 0,
@@ -43,7 +43,6 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides, containe
 	// Base calculations
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
-	const curve = Math.pow(delta, 0.2)
 	const unit = containerSize.height / 100
 
 	if (mode === "2D") return {
@@ -56,14 +55,15 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides, containe
 
 	return {
 		transform: `
-			translateX(${transform.x}px)
-			translateY(${postition * -curve * transform.y}px)
-			translateZ(${(postition * transform.z) * unit}px)
-			rotateX(${postition * -curve * rotate.x}deg)
+			translateX(${0}px)
+			translateY(${0}px)
+			translateZ(${postition * transform.z}px)
+			rotateX(${postition * rotate.x}deg)
 			rotateY(${rotate.y}deg)
 			rotateZ(${rotate.z}deg)
 		`,
 		zIndex: 100 - delta,
+		transformOrigin: "top",
 		opacity: delta > 0 ? 0.3 : 1,
 		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : "",
 		height: "100%",
