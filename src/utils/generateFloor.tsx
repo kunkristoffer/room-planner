@@ -19,7 +19,7 @@ export function GenerateFloor({
   function updateCurrent(event: MouseEvent<SVGSVGElement>) {
     const targetElement = event.target;
 
-    if (targetElement instanceof SVGPolygonElement) {
+    if (targetElement instanceof SVGPolygonElement && curFloor === floor) {
       handleClick(floor, targetElement.id, "2D");
     } else {
       handleClick(floor, "", "3D");
