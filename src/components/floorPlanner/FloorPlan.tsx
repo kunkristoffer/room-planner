@@ -3,7 +3,7 @@
 // Globals
 import { type FloorProp } from "@/types/Rooms";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { generateFloorStyles, type ViewMode } from "@/utils/styles";
 import { fillFloorNumbers } from "@/utils/misc";
 import { GenerateFloor } from "@/utils/generateFloor";
@@ -53,6 +53,13 @@ export function FloorPlan({ floors }: FloorPlanProps) {
     }
   }
 
+  // Get svg container size
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({
+    height: 0,
+    width: 0,
+  });
+
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
@@ -73,13 +80,24 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   const floorNumbers = floorsFilled.map((floor) => floor.floor);
   const floorLabel = floorsFilled.find((floor) => floor.floor === curFloor);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const containerRectangle = containerRef.current.getBoundingClientRect();
+    setContainerSize({
+      height: containerRectangle.height,
+      width: containerRectangle.width,
+    });
+  }, []);
+
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white overflow-hidden rounded-lg">
+    <div className="relative size-full flex flex-row! gap-2 bg-white rounded-lg">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
       >
         <div
+          ref={containerRef}
           className="relative  h-full w-full transform-3d transition-all duration-1000"
           style={{
             transform:
@@ -102,6 +120,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
                 curFloor: curFloor,
                 maxFloors: floorsFilled.length,
                 mode: viewMode,
+                containerSize: containerSize,
                 overrides: {
                   transform: {
                     x: translateX,
@@ -119,7 +138,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
           ))}
         </div>
       </div>
-      <div className="absolute right-0 flex-col gap-2 text-black z-50 w-36 p-4 hidden">
+      <div className="absolute left-full flex-col gap-2 text-black bg-white z-50 w-36 p-4 flex">
         <DebugSlider
           label="Translate X"
           value={translateX}
