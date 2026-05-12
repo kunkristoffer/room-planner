@@ -5,6 +5,11 @@ export function getDelta(val: number, length: number) {
     return Math.abs(val - length);
 }
 
+/** Clamp number */
+export function clamp(val: number, min: number, max: number) {
+    return Math.max(Math.min(val, max), min)
+}
+
 /** Fills inn missing numbers in an array, used for generating a full floor list based on missing entryes */
 export function fillFloorNumbers(floors: FloorProp[]) {
     const floorNumbers = floors.map(floor => floor.floor)

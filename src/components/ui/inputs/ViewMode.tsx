@@ -1,4 +1,4 @@
-import { ViewMode } from "@/utils/styles";
+import { type ViewMode } from "@/types/Rooms";
 
 interface SelectProps {
   value: ViewMode;

@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react";
-
 interface FloorNumberSliderProps {
   floor: number;
   floors: number[];

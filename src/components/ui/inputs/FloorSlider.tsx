@@ -1,6 +1,6 @@
 "use client";
 
-import { ViewMode } from "@/utils/styles";
+import { type ViewMode } from "@/types/Rooms";
 import { useEffect, useRef, useState } from "react";
 
 interface FloorSliderProps {

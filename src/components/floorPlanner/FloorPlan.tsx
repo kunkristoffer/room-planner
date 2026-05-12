@@ -1,10 +1,10 @@
 "use client";
 
 // Globals
-import { type FloorProp } from "@/types/Rooms";
+import type { ViewMode, FloorProp } from "@/types/Rooms";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { generateFloorStyles, type ViewMode } from "@/utils/styles";
+import { generateFloorStyles } from "@/utils/styles";
 import { fillFloorNumbers } from "@/utils/misc";
 import { GenerateFloor } from "@/utils/generateFloor";
 
@@ -62,9 +62,9 @@ export function FloorPlan({ floors }: FloorPlanProps) {
 
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
-  const [translateY, settranslateY] = useState(0);
-  const [translateZ, settranslateZ] = useState(35);
-  const [rotateX, setRotateX] = useState(15);
+  const [translateY, settranslateY] = useState(50);
+  const [translateZ, settranslateZ] = useState(20);
+  const [rotateX, setRotateX] = useState(10);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
 
@@ -95,7 +95,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   }, []);
 
   return (
-    <div className="relative size-full flex flex-row! gap-2 bg-white rounded-lg">
+    <div className="relative size-full flex flex-row! gap-2 bg-white rounded-lg overflow-hidden">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
@@ -117,7 +117,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
               curFloor={curFloor}
               curRoom={curRoom}
               rooms={rooms}
-              className={`absolute ${curFloor === floor ? "" : ""} transition-all duration-1000 hover:bg-gray-900/30`}
+              className={`absolute ${curFloor === floor ? "bg-slate-300" : ""} transition-all duration-1000 hover:bg-slate-200`}
               handleClick={handleClick}
               style={generateFloorStyles({
                 floor,

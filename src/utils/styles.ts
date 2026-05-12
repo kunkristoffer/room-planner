@@ -1,7 +1,6 @@
-import { CSSProperties } from "react";
-
-export type ViewMode = "2D" | "3D"
-
+import { type CSSProperties } from "react";
+import { type ViewMode } from "@/types/Rooms";
+import { clamp } from "./misc";
 interface Props {
 	floor: number
 	curFloor: number
@@ -44,6 +43,7 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, containerSize,
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
 	const unit = containerSize.height / 100
+	const strength = delta === 0 ? 0 : Math.exp((1 - (delta - 1)) * 0.8);
 
 	if (mode === "2D") return {
 		opacity: delta === 0 ? 1 : 0,
@@ -56,16 +56,15 @@ export function generateFloorStyles({ floor, curFloor, maxFloors, containerSize,
 	return {
 		transform: `
 			translateX(${0}px)
-			translateY(${0}px)
-			translateZ(${postition * transform.z}px)
+			translateY(${postition * strength * transform.y}px)
+			translateZ(${postition * strength * (unit * transform.z)}px)
 			rotateX(${postition * rotate.x}deg)
 			rotateY(${rotate.y}deg)
 			rotateZ(${rotate.z}deg)
 		`,
 		zIndex: 100 - delta,
 		transformOrigin: "top",
-		opacity: delta > 0 ? 0.3 : 1,
-		backgroundColor: floor === curFloor ? "rgba(225,225,225,1)" : "",
+		opacity: delta ? clamp(strength, 0, 0.5) : 1,
 		height: "100%",
 		width: "80%",
 		left: "15%"
