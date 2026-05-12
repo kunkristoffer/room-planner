@@ -6,18 +6,24 @@ import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main className="flex-1 container mx-auto flex flex-col gap-4">
-      <div className="relative aspect-3/1 rounded-md overflow-hidden mb-12">
-        <Image src="/game.png" alt="game picture" fill loading="eager" />
-        <div className="absolute left-1/5 bottom-0 translate-y-1/2 bg-background p-8 rounded-md">
+    <main className="flex-1 container mx-auto flex flex-col gap-4 p-4">
+      <div className="relative aspect-3/1 rounded-md mb-12">
+        <Image
+          src="/game.png"
+          alt="game picture"
+          fill
+          loading="eager"
+          className="z-0"
+        />
+        <div className="md:absolute left-1/2 bottom-0 md:max-w-2/3 md:-translate-x-1/2 translate-y-1/2 flex flex-col p-4 bg-background rounded-md">
           <h1 className="text-center text-4xl">Event title</h1>
-          <p>
+          <p className="">
             This is a one sentence subtitle that is used on the cards, repeated
             here as a lead-in
           </p>
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 max-sm:flex-col">
         <div className="flex-2 flex flex-col gap-4">
           <div className="p-4 bg-foreground rounded-md">
             <p className="text-center">

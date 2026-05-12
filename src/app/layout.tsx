@@ -31,16 +31,16 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <header className="bg-foreground p-4 text-lg">
           <div className="container mx-auto flex justify-between gap-4">
-            <span>logo</span>
-            <span className="flex justify-center gap-4">
+            <span className="flex-1 max-[475px]:hidden">logo</span>
+            <span className="flex-1 flex justify-center gap-4">
               <Link href="/">Program</Link>
               <Link href="/full">Min side</Link>
             </span>
-            <span>Fornavn Etternavn</span>
+            <span className="flex-1 max-[475px]:hidden text-end">Fornavn Etternavn</span>
           </div>
         </header>
         <div className="container mx-auto flex justify-between p-4 text-sm">
-          <p>Home / Event title</p>
+          <p className="max-[475px]:hidden">Home / Event title</p>
           <span className="flex gap-4">
             <p>Forrige</p>
             <b>Neste</b>
