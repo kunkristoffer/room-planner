@@ -10,6 +10,8 @@ interface FloorSliderProps {
   onChange: (floor: number, id: string, mode: ViewMode) => void;
 }
 
+// Todo remove change event and just handle updating url here
+
 export function FloorSlider({
   curFloor,
   availableFloors,
@@ -43,6 +45,10 @@ export function FloorSlider({
         100,
       );
       console.log(relativeToPercent);
+
+      // Calculate which floor is closest
+      const floor = 2;
+      onChange(floor, "", "3D");
     }
 
     function handleRelease() {
