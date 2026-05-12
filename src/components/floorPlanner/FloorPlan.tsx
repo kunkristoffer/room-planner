@@ -30,6 +30,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   // Handle state change
   function handleClick(newFloor: number, id: string, mode?: ViewMode) {
     const params = new URLSearchParams(searchParams);
+    const prevURL = `${pathName}?${params.toString()}`;
 
     params.set("floor", String(newFloor));
 
@@ -43,7 +44,13 @@ export function FloorPlan({ floors }: FloorPlanProps) {
       params.set("view", mode);
     }
 
-    router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+    const newURL = `${pathName}?${params.toString()}`;
+    if (prevURL !== newURL) {
+      console.log(prevURL);
+      console.log(newURL);
+
+      router.replace(`${pathName}?${params.toString()}`, { scroll: false });
+    }
   }
 
   // Transform svgs
