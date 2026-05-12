@@ -24,28 +24,18 @@ export function FloorSlider({
 
   // Calculations
   const minFloor = Math.min(...floors);
-  const maxFloor = Math.max(...floors);
   const floorRange = floors.length;
-
-  //console.log(curFloor, availableFloors, floors, floorRange);
 
   function getPercentFromFloor(floor: number, min: number, range: number) {
     const percent = ((floor - min + 1) / range) * 100;
     return 100 - percent;
   }
 
-  function getFloorFromPercent(
-    percent: number,
-    range: number,
-    available: number[],
-  ) {
-    console.log(percent, available, range);
-
-    return 2;
+  function getFloorFromPercent(percent: number, range: number) {
+    const percentToFloor = Math.round((percent / 100) * (range - 1));
+    const floorNumber = floors[percentToFloor];
+    return floorNumber;
   }
-
-  function getClosestAvailableFloor(floor: number, avilable: number[]) {}
-
   useEffect(() => {
     if (!isDraging) return;
 
@@ -53,18 +43,19 @@ export function FloorSlider({
       if (!trackRef.current) return;
       const containerSize = trackRef.current.getBoundingClientRect();
       const relativeHeight = e.clientY - containerSize.top;
-      const relativeToPercent = Math.min(
-        Math.max((relativeHeight / containerSize.height) * 100, 0),
-        100,
-      );
+      const relativeToPercent =
+        100 -
+        Math.min(
+          Math.max((relativeHeight / containerSize.height) * 100, 0),
+          100,
+        );
 
-      const floor = getFloorFromPercent(
-        relativeToPercent,
-        floors.length,
-        availableFloors,
-      );
+      const floor = getFloorFromPercent(relativeToPercent, floors.length);
+
+      // limit to closest floor?
+
       if (floor !== curFloor) {
-        //onChange(floor, "", "3D");
+        onChange(floor, "", "3D");
       }
     }
 
