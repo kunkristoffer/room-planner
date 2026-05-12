@@ -217,7 +217,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
       </div>
       <FloorNumberSlider
         floor={curFloor}
-        floors={availableFloors}
+        floors={floorNumbers}
         handleFloor={handleClick}
       />
       {/* <div className="absolute left-5 top-1/2 -translate-y-1/2">
