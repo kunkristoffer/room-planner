@@ -63,7 +63,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(0);
-  const [translateZ, settranslateZ] = useState(130);
+  const [translateZ, settranslateZ] = useState(35);
   const [rotateX, setRotateX] = useState(-5);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
@@ -83,11 +83,15 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const containerRectangle = containerRef.current.getBoundingClientRect();
-    setContainerSize({
-      height: containerRectangle.height,
-      width: containerRectangle.width,
+    const observer = new ResizeObserver(([entry]) => {
+      setContainerSize({
+        height: entry.contentRect.height,
+        width: entry.contentRect.width,
+      });
     });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (

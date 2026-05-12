@@ -44,6 +44,7 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides, containe
 	const postition = floor - curFloor
 	const delta = Math.abs(postition)
 	const curve = Math.pow(delta, 0.2)
+	const unit = containerSize.height / 100
 
 	if (mode === "2D") return {
 		opacity: delta === 0 ? 1 : 0,
@@ -57,7 +58,7 @@ export function generateFloorStyles({ floor, curFloor, mode, overrides, containe
 		transform: `
 			translateX(${transform.x}px)
 			translateY(${postition * -curve * transform.y}px)
-			translateZ(${postition * transform.z}px)
+			translateZ(${(postition * transform.z) * unit}px)
 			rotateX(${postition * -curve * rotate.x}deg)
 			rotateY(${rotate.y}deg)
 			rotateZ(${rotate.z}deg)
