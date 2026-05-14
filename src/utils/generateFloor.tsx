@@ -67,7 +67,7 @@ export function GenerateFloor({
           y={0}
           width={100}
           height={100}
-          className="fill-blue-100"
+          className="fill-yellow-100"
         />
         <text x="525" y="50" className="text-2xl fill">
           Heis
@@ -77,11 +77,25 @@ export function GenerateFloor({
           y={125}
           width={100}
           height={100}
-          className="fill-purple-100"
+          className="fill-blue-100"
         />
         <text x="525" y="175" className="text-2xl fill">
-          Rom
+          Trapp
         </text>
+        {rooms.length > 3 && (
+          <>
+            <rect
+              x={650}
+              y={125}
+              width={100}
+              height={100}
+              className="fill-purple-100"
+            />
+            <text x="775" y="175" className="text-2xl fill">
+              Rom
+            </text>
+          </>
+        )}
       </g>
 
       {/* Rooms */}

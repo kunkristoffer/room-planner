@@ -24,13 +24,69 @@ export const floors: FloorProp[] = [
                     { x: 250, y: 375 },
                 ],
             }, {
-                id: "stair-1",
-                type: "stair",
+                id: "room-1",
+                label: "",
+                type: "room",
                 points: [
+                    { x: 0, y: 500 },
+                    { x: 300, y: 500 },
+                    { x: 300, y: 675 },
+                    { x: 0, y: 675 },
+                ],
+            }, {
+                id: "room-2",
+                label: "",
+                type: "room",
+                points: [
+                    { x: 300, y: 500 },
+                    { x: 600, y: 500 },
+                    { x: 600, y: 675 },
+                    { x: 300, y: 675 },
+                ],
+            }, {
+                id: "room-3",
+                label: "",
+                type: "room",
+                points: [
+                    { x: 600, y: 500 },
+                    { x: 850, y: 500 },
+                    { x: 850, y: 675 },
+                    { x: 600, y: 675 },
+                ],
+            }, {
+                id: "room-4",
+                label: "",
+                type: "room",
+                points: [
+                    { x: 325, y: 250 },
+                    { x: 850, y: 250 },
+                    { x: 850, y: 375 },
+                    { x: 325, y: 375 },
+                ],
+            }, {
+                id: "utility-1",
+                label: "",
+                type: "utility",
+                points: [
+                    { x: 0, y: 0 },
+                    { x: 325, y: 0 },
+                    { x: 325, y: 375 },
+                    { x: 300, y: 375 },
+                    { x: 300, y: 325 },
+                    { x: 200, y: 325 },
                     { x: 200, y: 375 },
-                    { x: 400, y: 375 },
-                    { x: 400, y: 500 },
-                    { x: 200, y: 500 },
+                    { x: 0, y: 375 },
+
+                ],
+            }, {
+                id: "utility-2",
+                label: "",
+                type: "utility",
+                points: [
+                    { x: 0, y: 375 },
+                    { x: 100, y: 375 },
+                    { x: 100, y: 500 },
+                    { x: 0, y: 500 },
                 ],
             }
         ],
@@ -56,7 +112,12 @@ export const floors: FloorProp[] = [
                     { x: 300, y: 375 },
                     { x: 250, y: 375 },
                 ],
-            }, {
+            }
+        ],
+    }, {
+        floor: 1,
+        rooms: [
+            {
                 id: "stair-1",
                 type: "stair",
                 points: [
@@ -65,8 +126,122 @@ export const floors: FloorProp[] = [
                     { x: 400, y: 500 },
                     { x: 200, y: 500 },
                 ],
+            }, {
+                id: "elevator-1",
+                type: "elevator",
+                points: [
+                    { x: 200, y: 325 },
+                    { x: 250, y: 325 },
+                    { x: 250, y: 375 },
+                    { x: 200, y: 375 },
+                ],
+            }, {
+                id: "elevator-2",
+                type: "elevator",
+                points: [
+                    { x: 250, y: 325 },
+                    { x: 300, y: 325 },
+                    { x: 300, y: 375 },
+                    { x: 250, y: 375 },
+                ],
             }
-        ],
+        ]
+    }, {
+        floor: 2,
+        rooms: [
+            {
+                id: "stair-1",
+                type: "stair",
+                points: [
+                    { x: 200, y: 375 },
+                    { x: 400, y: 375 },
+                    { x: 400, y: 500 },
+                    { x: 200, y: 500 },
+                ],
+            }, {
+                id: "elevator-1",
+                type: "elevator",
+                points: [
+                    { x: 200, y: 325 },
+                    { x: 250, y: 325 },
+                    { x: 250, y: 375 },
+                    { x: 200, y: 375 },
+                ],
+            }, {
+                id: "elevator-2",
+                type: "elevator",
+                points: [
+                    { x: 250, y: 325 },
+                    { x: 300, y: 325 },
+                    { x: 300, y: 375 },
+                    { x: 250, y: 375 },
+                ],
+            }
+        ]
+    }, {
+        floor: 3,
+        rooms: [
+            {
+                id: "stair-1",
+                type: "stair",
+                points: [
+                    { x: 200, y: 375 },
+                    { x: 400, y: 375 },
+                    { x: 400, y: 500 },
+                    { x: 200, y: 500 },
+                ],
+            }, {
+                id: "elevator-1",
+                type: "elevator",
+                points: [
+                    { x: 200, y: 325 },
+                    { x: 250, y: 325 },
+                    { x: 250, y: 375 },
+                    { x: 200, y: 375 },
+                ],
+            }, {
+                id: "elevator-2",
+                type: "elevator",
+                points: [
+                    { x: 250, y: 325 },
+                    { x: 300, y: 325 },
+                    { x: 300, y: 375 },
+                    { x: 250, y: 375 },
+                ],
+            }
+        ]
+    }, {
+        floor: 4,
+        rooms: [
+            {
+                id: "stair-1",
+                type: "stair",
+                points: [
+                    { x: 200, y: 375 },
+                    { x: 400, y: 375 },
+                    { x: 400, y: 500 },
+                    { x: 200, y: 500 },
+                ],
+            }, {
+                id: "elevator-1",
+                type: "elevator",
+                points: [
+                    { x: 200, y: 325 },
+                    { x: 250, y: 325 },
+                    { x: 250, y: 375 },
+                    { x: 200, y: 375 },
+                ],
+            }, {
+                id: "elevator-2",
+                type: "elevator",
+                points: [
+                    { x: 250, y: 325 },
+                    { x: 300, y: 325 },
+                    { x: 300, y: 375 },
+                    { x: 250, y: 375 },
+                ],
+            }
+        ]
     }, {
         floor: 5,
         label: "Mini-con",
