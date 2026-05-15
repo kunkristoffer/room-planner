@@ -59,7 +59,7 @@ export function GenerateFloor({
       <path d="M0 0 H325 V375 H850 V675 H0 Z"></path>
 
       {/* Legend */}
-      <g
+      {/* <g
         className={`${curFloor === floor ? "opacity-100" : "opacity-0"} duration-1000`}
       >
         <rect
@@ -96,7 +96,7 @@ export function GenerateFloor({
             </text>
           </>
         )}
-      </g>
+      </g> */}
 
       {/* Rooms */}
       {rooms.map((room) => (
