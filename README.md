@@ -6,6 +6,10 @@ This project started out as a mini-project for an application, but grew into a p
 
 The goal is to explore how floor plans, rooms, and architectural layouts can be represented as structured geometry data and rendered dynamically in the browser without relying on heavy external libraries.
 
+## Demo
+
+[![Watch the video](https://raw.githubusercontent.com/kunkristoffer/room-planner/main/docs/media/thumbnail_0_1.png)](https://raw.githubusercontent.com/kunkristoffer/room-planner/main/docs/media/version_0_1.mp4)
+
 ## Want to test this code?
 
 First you have to install [Nodejs](https://nodejs.org/en/download), then you can run the Nextjs development server:
