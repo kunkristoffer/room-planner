@@ -8,6 +8,46 @@ interface FloorProps extends ComponentProps<"svg"> {
   handleClick: (floor: number, id: string, mode: ViewMode) => void;
 }
 
+function GenerateDoor({
+  x,
+  y,
+  angle,
+  type,
+}: NonNullable<Room["doors"]>[number]) {
+  if (type === "sliding" || type === "double")
+    return (
+      <g transform={`translate(${x} ${y}) rotate(${angle})`}>
+        <line x1="0" y1="0" x2="25" y2="0" stroke="gray" />
+        <line x1="0" y1="0" x2="0" y2="25" stroke="gray" />
+        <path
+          d="M 0 25 q 25 0 25 -25"
+          fill="none"
+          stroke="black"
+          strokeDasharray="2 2"
+        />
+      </g>
+    );
+
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${angle})`}>
+      <line
+        x1="0"
+        y1={type === "left" ? "0" : "25"}
+        x2="25"
+        y2={type === "left" ? "0" : "25"}
+        stroke="gray"
+      />
+      <line x1="0" y1="0" x2="0" y2="25" stroke="gray" />
+      <path
+        d={type === "left" ? "M 0 25 q 25 0 25 -25" : "M 25 25 q 0 -25 -25 -25"}
+        fill="none"
+        stroke="black"
+        strokeDasharray="2 2"
+      />
+    </g>
+  );
+}
+
 export function GenerateFloor({
   curFloor,
   curRoom,
@@ -100,16 +140,22 @@ export function GenerateFloor({
 
       {/* Rooms */}
       {rooms.map((room) => (
-        <polygon
-          key={room.id}
-          id={room.id}
-          points={room.points.map((p) => p.x + "," + p.y).join(",")}
-          strokeWidth={room.wallThickness ?? 2}
-          className={`
+        <>
+          <polygon
+            key={room.id}
+            id={room.id}
+            points={room.points.map((p) => p.x + "," + p.y).join(",")}
+            strokeWidth={room.wallThickness ?? 2}
+            className={`
             ${getRoomColor(room.type)}
             ${room.type === "room" && curRoom === room.id ? "fill-red-100 hover:fill-red-200 animate-pulse" : ""}
           `}
-        />
+          />
+          {room.doors &&
+            room.doors?.map((door, i) => (
+              <GenerateDoor key={`${room.id}-${i}`} {...door} />
+            ))}
+        </>
       ))}
     </svg>
   );
