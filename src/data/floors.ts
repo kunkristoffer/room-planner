@@ -116,6 +116,7 @@ export const floors: FloorProp[] = [
         ],
     }, {
         floor: 1,
+        label: "",
         rooms: [
             {
                 id: "stair-1",
@@ -447,6 +448,7 @@ export const floors: FloorProp[] = [
                     { x: 150, y: 260 },
                     { x: 150, y: 0 },
                 ],
+                doors: [{ type: "left", x: 150, y: 120, angle: 0 }]
             }, {
                 id: "room-2",
                 type: "room",
@@ -456,6 +458,7 @@ export const floors: FloorProp[] = [
                     { x: 150, y: 675 },
                     { x: 150, y: 350 },
                 ],
+                doors: [{ type: "right", x: 150, y: 450, angle: 0 }]
             }, {
                 id: "room-3",
                 type: "room",
@@ -465,6 +468,7 @@ export const floors: FloorProp[] = [
                     { x: 300, y: 675 },
                     { x: 300, y: 550 },
                 ],
+                doors: [{ type: "right", x: 180, y: 550, angle: 270 }]
             }, {
                 id: "room-4",
                 type: "room",
@@ -474,6 +478,7 @@ export const floors: FloorProp[] = [
                     { x: 500, y: 675 },
                     { x: 500, y: 550 },
                 ],
+                doors: [{ type: "right", x: 325, y: 550, angle: 270 }]
             }, {
                 id: "room-5",
                 type: "room",
@@ -483,6 +488,7 @@ export const floors: FloorProp[] = [
                     { x: 700, y: 675 },
                     { x: 700, y: 550 },
                 ],
+                doors: [{ type: "right", x: 600, y: 525, angle: 0 }]
             }, {
                 id: "room-6",
                 type: "room",
@@ -492,6 +498,7 @@ export const floors: FloorProp[] = [
                     { x: 850, y: 675 },
                     { x: 850, y: 550 },
                 ],
+                doors: [{ type: "right", x: 725, y: 525, angle: 0 }]
             }, {
                 id: "room-7",
                 type: "room",
@@ -501,6 +508,7 @@ export const floors: FloorProp[] = [
                     { x: 750, y: 500 },
                     { x: 750, y: 375 },
                 ],
+                doors: [{ type: "right", x: 650, y: 500, angle: 90 }]
             }, {
                 id: "room-8",
                 type: "room",
@@ -510,6 +518,7 @@ export const floors: FloorProp[] = [
                     { x: 325, y: 275 },
                     { x: 200, y: 275 },
                 ],
+                doors: [{ type: "right", x: 200, y: 250, angle: 180 }]
             }, {
                 id: "room-9",
                 type: "room",
@@ -519,8 +528,23 @@ export const floors: FloorProp[] = [
                     { x: 325, y: 200 },
                     { x: 200, y: 200 },
                 ],
+                doors: [{ type: "right", x: 175, y: 145, angle: 270 }]
             }, {
                 id: "utility-1",
+                type: "utility",
+                points: [
+                    { x: 120, y: 500 },
+                    { x: 150, y: 500 },
+                    { x: 150, y: 600 },
+                    { x: 120, y: 600 },
+                    { x: 120, y: 575 },
+                    { x: 100, y: 575 },
+                    { x: 100, y: 550 },
+                    { x: 120, y: 550 },
+                ],
+                doors: [{ type: "right", x: 150, y: 510, angle: 0 }]
+            }, {
+                id: "utility-2",
                 type: "utility",
                 points: [
                     { x: 475, y: 375 },
@@ -531,7 +555,7 @@ export const floors: FloorProp[] = [
                     { x: 475, y: 450 },
                 ],
             }, {
-                id: "utility-2",
+                id: "utility-3",
                 type: "utility",
                 points: [
                     { x: 450, y: 450 },
@@ -540,7 +564,7 @@ export const floors: FloorProp[] = [
                     { x: 450, y: 500 },
                 ],
             }, {
-                id: "utility-3",
+                id: "utility-4",
                 type: "utility",
                 points: [
                     { x: 400, y: 375 },
@@ -551,7 +575,7 @@ export const floors: FloorProp[] = [
                     { x: 400, y: 500 },
                 ],
             }, {
-                id: "utility-4",
+                id: "utility-5",
                 type: "utility",
                 points: [
                     { x: 200, y: 275 },
