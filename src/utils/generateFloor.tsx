@@ -1,5 +1,6 @@
 import type { RoomType, Room, ViewMode } from "@/types/Rooms";
-import { ComponentProps, MouseEvent } from "react";
+import { type ComponentProps, type MouseEvent, Fragment } from "react";
+
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
   floor: number;
@@ -140,7 +141,7 @@ export function GenerateFloor({
 
       {/* Rooms */}
       {rooms.map((room) => (
-        <>
+        <Fragment key={room.id}>
           <polygon
             key={room.id}
             id={room.id}
@@ -155,7 +156,7 @@ export function GenerateFloor({
             room.doors?.map((door, i) => (
               <GenerateDoor key={`${room.id}-${i}`} {...door} />
             ))}
-        </>
+        </Fragment>
       ))}
     </svg>
   );
