@@ -18,14 +18,9 @@ function GenerateDoor({
   if (type === "sliding" || type === "double")
     return (
       <g transform={`translate(${x} ${y}) rotate(${angle})`}>
-        <line x1="0" y1="0" x2="25" y2="0" stroke="gray" />
-        <line x1="0" y1="0" x2="0" y2="25" stroke="gray" />
-        <path
-          d="M 0 25 q 25 0 25 -25"
-          fill="none"
-          stroke="black"
-          strokeDasharray="2 2"
-        />
+        <line x1="0" y1="0" x2="50" y2="0" stroke="lightgray" strokeWidth={2} />
+        <line x1="0" y1="-5" x2="0" y2="5" stroke="gray" />
+        <line x1="50" y1="-5" x2="50" y2="5" stroke="gray" />
       </g>
     );
 
@@ -141,7 +136,7 @@ export function GenerateFloor({
 
       {/* Rooms */}
       {rooms.map((room) => (
-        <Fragment key={room.id}>
+        <g key={room.id}>
           <polygon
             key={room.id}
             id={room.id}
@@ -156,7 +151,7 @@ export function GenerateFloor({
             room.doors?.map((door, i) => (
               <GenerateDoor key={`${room.id}-${i}`} {...door} />
             ))}
-        </Fragment>
+        </g>
       ))}
     </svg>
   );
