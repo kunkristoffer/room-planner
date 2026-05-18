@@ -18,9 +18,22 @@ function GenerateDoor({
   if (type === "sliding" || type === "double")
     return (
       <g transform={`translate(${x} ${y}) rotate(${angle})`}>
-        <line x1="0" y1="0" x2="50" y2="0" stroke="lightgray" strokeWidth={2} />
+        <line
+          x1="0"
+          y1="0"
+          x2={type === "double" ? 50 : 30}
+          y2="0"
+          stroke="lightgray"
+          strokeWidth={2}
+        />
         <line x1="0" y1="-5" x2="0" y2="5" stroke="gray" />
-        <line x1="50" y1="-5" x2="50" y2="5" stroke="gray" />
+        <line
+          x1={type === "double" ? 50 : 30}
+          x2={type === "double" ? 50 : 30}
+          y1="-5"
+          y2="5"
+          stroke="gray"
+        />
       </g>
     );
 
