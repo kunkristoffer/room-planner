@@ -91,6 +91,8 @@ export function GenerateFloor({
         return "fill-yellow-100 hover:fill-yellow-300";
       case "stair":
         return "fill-blue-100 hover:fill-blue-300";
+      case "disabled":
+        return "fill-white";
       default:
         return "";
     }
@@ -165,9 +167,10 @@ export function GenerateFloor({
             ${room.type === "room" && curRoom === room.id ? "fill-red-100 hover:fill-red-200 animate-pulse" : ""}
           `}
           />
-          {room.doors?.map((door, i) => (
-            <GenerateDoor key={`${room.id}-${i}`} {...door} />
-          ))}
+          {room.type !== "disabled" &&
+            room.doors?.map((door, i) => (
+              <GenerateDoor key={`${room.id}-${i}`} {...door} />
+            ))}
         </g>
       ))}
     </svg>
