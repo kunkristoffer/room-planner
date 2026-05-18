@@ -122,122 +122,121 @@ export const floors: FloorProp[] = [
       {
         id: "room-1",
         type: "room",
+        label: "lounge",
+        origin: { x: 0, y: 500 },
         points: [
-          { x: 0, y: 500 },
-          { x: 300, y: 500 },
-          { x: 300, y: 675 },
-          { x: 0, y: 675 },
+          { x: 0, y: 0 },
+          { x: 300, y: 0 },
+          { x: 300, y: 175 },
+          { x: 0, y: 175 }
         ],
-        doors: [{ x: 150, y: 500, type: "double", angle: 0 }]
+        doors: [
+          { x: 150, y: 0, type: "double", angle: 0 }
+        ],
       }, {
         id: "room-2",
         type: "room",
+        origin: { x: 300, y: 500 },
         points: [
-          { x: 300, y: 500 },
-          { x: 600, y: 500 },
-          { x: 600, y: 675 },
-          { x: 300, y: 675 },
+          { x: 0, y: 0 },
+          { x: 300, y: 0 },
+          { x: 300, y: 175 },
+          { x: 0, y: 175 }
         ],
-        doors: [{ x: 350, y: 500, type: "double", angle: 0 }]
+        doors: [
+          { x: 50, y: 0, type: "double", angle: 0 }
+        ],
       }, {
         id: "room-3",
         type: "room",
+        origin: { x: 600, y: 500 },
         points: [
-          { x: 600, y: 500 },
-          { x: 850, y: 500 },
-          { x: 850, y: 675 },
-          { x: 600, y: 675 },
+          { x: 0, y: 0 },
+          { x: 250, y: 0 },
+          { x: 250, y: 175 },
+          { x: 0, y: 175 }
         ],
-        doors: [{ x: 650, y: 500, type: "double", angle: 0 }]
+        doors: [
+          { x: 50, y: 0, type: "double", angle: 0 }
+        ],
       }, {
         id: "room-4",
         type: "room",
+        origin: { x: 500, y: 200 },
         points: [
-          { x: 500, y: 200 },
-          { x: 850, y: 200 },
-          { x: 850, y: 375 },
-          { x: 500, y: 375 },
+          { x: 0, y: 0 },
+          { x: 350, y: 0 },
+          { x: 350, y: 175 },
+          { x: 0, y: 175 }
         ],
-        doors: [{ x: 650, y: 375, type: "double", angle: 0 }]
-      },
-      {
+        doors: [
+          { x: 150, y: 175, type: "double", angle: 0 },
+        ],
+      }, {
         id: "utility-1",
         type: "utility",
+        origin: { x: 0, y: 275 },
         points: [
-          { x: 0, y: 275 },
-          { x: 200, y: 275 },
-          { x: 200, y: 375 },
-          { x: 0, y: 375 },
-        ]
+          { x: 0, y: 0 },
+          { x: 200, y: 0 },
+          { x: 200, y: 100 },
+          { x: 0, y: 100 }
+        ],
       }, {
         id: "stair-1",
         type: "stair",
+        origin: { x: 800, y: 375 },
         points: [
-          { x: 800, y: 375 },
-          { x: 800, y: 500 },
-          { x: 850, y: 500 },
-          { x: 850, y: 375 },
+          { x: 0, y: 0 },
+          { x: 0, y: 125 },
+          { x: 50, y: 125 },
+          { x: 50, y: 0 }
         ],
         doors: [
-          {
-            x: 805,
-            y: 475,
-            type: "right",
-            angle: 0
-          }
-        ]
+          { x: 5, y: 100, type: "right", angle: 0 }
+        ],
       }, {
         id: "stair-2",
         type: "stair",
+        origin: { x: 350, y: 275 },
         points: [
-          { x: 350, y: 275 },
-          { x: 500, y: 275 },
-          { x: 500, y: 375 },
-          { x: 350, y: 375 },
+          { x: 0, y: 0 },
+          { x: 150, y: 0 },
+          { x: 150, y: 100 },
+          { x: 0, y: 100 }
         ],
         doors: [
-          {
-            x: 400,
-            y: 375,
-            type: "double",
-            angle: 0
-          }
-        ]
+          { x: 50, y: 100, type: "double", angle: 0 }
+        ],
       }, {
         id: "elevator-1",
         type: "elevator",
+        origin: { x: 200, y: 325 },
         points: [
-          { x: 200, y: 325 },
-          { x: 250, y: 325 },
-          { x: 250, y: 375 },
-          { x: 200, y: 375 },
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
         ],
         doors: [
-          {
-            x: 210,
-            y: 375,
-            type: "sliding",
-            angle: 0
-          }
-        ]
-      }, {
+          { x: 10, y: 50, type: "sliding", angle: 0 }
+        ],
+      },
+
+      {
         id: "elevator-2",
         type: "elevator",
+        origin: { x: 250, y: 325 },
         points: [
-          { x: 250, y: 325 },
-          { x: 300, y: 325 },
-          { x: 300, y: 375 },
-          { x: 250, y: 375 },
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
         ],
         doors: [
-          {
-            x: 260,
-            y: 375,
-            type: "sliding",
-            angle: 0
-          }
-        ]
-      }
+          { x: 10, y: 50, type: "sliding", angle: 0 }
+        ],
+      },
     ],
   }, {
     floor: 2,
