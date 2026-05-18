@@ -107,7 +107,7 @@ export function GenerateFloor({
       onClick={updateCurrent}
     >
       {/**Outer shape (L building)*/}
-      <path d={shape ?? ""} />
+      <path d={shape ?? "M0 0 H325 V375 H850 V675 H0 Z"} />
 
       {/* Legend */}
       {/* <g
