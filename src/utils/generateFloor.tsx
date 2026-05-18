@@ -162,10 +162,11 @@ export function GenerateFloor({
             id={room.id}
             points={room.points.map((p) => p.x + "," + p.y).join(",")}
             strokeWidth={room.wallThickness ?? 2}
-            className={`
-            ${getRoomColor(room.type)}
-            ${room.type === "room" && curRoom === room.id ? "fill-red-100 hover:fill-red-200 animate-pulse" : ""}
-          `}
+            className={
+              room.type === "room" && curRoom === room.id
+                ? "fill-red-100 hover:fill-red-200 animate-pulse"
+                : getRoomColor(room.type)
+            }
           />
           {room.type !== "disabled" &&
             room.doors?.map((door, i) => (
