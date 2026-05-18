@@ -16,7 +16,10 @@ function GenerateDoor({
   y,
   angle,
   type,
-}: NonNullable<Room["doors"]>[number]) {
+  isVisible,
+}: NonNullable<Room["doors"]>[number] & { isVisible: boolean }) {
+  if (!isVisible) return null;
+
   if (type === "sliding" || type === "double")
     return (
       <g transform={`translate(${x} ${y}) rotate(${angle})`}>
@@ -88,15 +91,15 @@ export function GenerateFloor({
   ): ComponentProps<"polygon">["className"] {
     switch (type) {
       case "room":
-        return "fill-purple-100 hover:fill-purple-300";
+        return "fill-rose-100 hover:fill-rose-200";
       case "bathroom":
-        return "fill-green-100 hover:fill-green-300";
+        return "fill-green-100 hover:fill-green-200";
       case "utility":
-        return "fill-gray-100 hover:fill-gray-300";
+        return "fill-gray-100 hover:fill-gray-200";
       case "elevator":
-        return "fill-yellow-100 hover:fill-yellow-300";
+        return "fill-yellow-100 hover:fill-yellow-200";
       case "stair":
-        return "fill-blue-100 hover:fill-blue-300";
+        return "fill-blue-100 hover:fill-blue-200";
       case "disabled":
         return "fill-white";
       default:
@@ -178,14 +181,26 @@ export function GenerateFloor({
 
           {/* Doors */}
           {room.type !== "disabled" &&
-            (curRoom.length ? (curRoom === room.id ? true : false) : true) &&
             room.doors?.map((door, i) => (
-              <GenerateDoor key={`${room.id}-${i}`} {...door} />
+              <GenerateDoor
+                key={`${room.id}-${i}`}
+                /* i hate ternaries, but this was the fastet to troubleshoot */
+                isVisible={
+                  curRoom.length
+                    ? curRoom === room.id
+                      ? true
+                      : room.type === "stair"
+                        ? true
+                        : false
+                    : true
+                }
+                {...door}
+              />
             ))}
 
           {/* Pathfinding */}
           {curRoom === room.id && room?.path && room.path.length >= 2 && (
-            <g className="z-10">
+            <g className="">
               <path
                 d={coordsToPath(room.path)}
                 fill="none"
@@ -207,6 +222,13 @@ export function GenerateFloor({
                   repeatCount="indefinite"
                 />
               </path>
+              <circle
+                cx={room.path.at(0)?.x}
+                cy={room.path.at(0)?.y}
+                r={10}
+                fill="red"
+                stroke="none"
+              />
               <circle
                 cx={room.path.at(-1)?.x}
                 cy={room.path.at(-1)?.y}
