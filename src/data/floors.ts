@@ -55,6 +55,12 @@ export const floors: FloorProp[] = [
           { x: 300, y: 175 },
           { x: 0, y: 175 }
         ],
+        path: [
+          { x: 225, y: 540 },
+          { x: 225, y: 440 },
+          { x: 470, y: 440 },
+          { x: 470, y: 390 },
+        ],
         doors: [
           { x: 200, y: 0, type: "left", angle: 270, },
           { x: 250, y: 0, type: "left", angle: 180, }
@@ -68,6 +74,12 @@ export const floors: FloorProp[] = [
           { x: 300, y: 0 },
           { x: 300, y: 175 },
           { x: 0, y: 175 }
+        ],
+        path: [
+          { x: 375, y: 540 },
+          { x: 375, y: 440 },
+          { x: 470, y: 440 },
+          { x: 470, y: 390 },
         ],
         doors: [
           { x: 50, y: 0, type: "left", angle: 270, },
@@ -83,6 +95,12 @@ export const floors: FloorProp[] = [
           { x: 250, y: 175 },
           { x: 0, y: 175 }
         ],
+        path: [
+          { x: 675, y: 540 },
+          { x: 675, y: 440 },
+          { x: 470, y: 440 },
+          { x: 470, y: 390 },
+        ],
         doors: [
           { x: 50, y: 0, type: "left", angle: 270, },
           { x: 100, y: 0, type: "left", angle: 180, }
@@ -96,6 +114,12 @@ export const floors: FloorProp[] = [
           { x: 350, y: 0 },
           { x: 350, y: 100 },
           { x: 0, y: 100 }
+        ],
+        path: [
+          { x: 675, y: 330 },
+          { x: 675, y: 440 },
+          { x: 470, y: 440 },
+          { x: 470, y: 390 },
         ],
         doors: [
           { x: 175, y: 100, type: "right", angle: 90 },
