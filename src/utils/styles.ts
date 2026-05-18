@@ -48,7 +48,12 @@ export function generateFloorStyles({
   const postition = floor - curFloor;
   const delta = Math.abs(postition);
   const unit = containerSize.height / 100;
+  const sign = Math.sign(postition)
   const strength = delta === 0 ? 0 : Math.exp((1 - (delta - 1)) * 0.8);
+
+  const rotation = (postition * rotate.x)
+  console.log(`Curr ${curFloor} > floor ${floor} > strength ${strength / 2} > rotation ${rotation}`);
+
 
   if (mode === "2D")
     return {
@@ -64,7 +69,7 @@ export function generateFloorStyles({
 			translateX(${0}px)
 			translateY(${postition * strength * transform.y}px)
 			translateZ(${postition * strength * (unit * transform.z)}px)
-			rotateX(${postition * rotate.x}deg)
+			rotateX(${rotation}deg)
 			rotateY(${rotate.y}deg)
 			rotateZ(${rotate.z}deg)
 		`,

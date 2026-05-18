@@ -63,7 +63,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   // Transform svgs
   const [translateX, settranslateX] = useState(-10);
   const [translateY, settranslateY] = useState(50);
-  const [translateZ, settranslateZ] = useState(20);
+  const [translateZ, settranslateZ] = useState(22);
   const [rotateX, setRotateX] = useState(10);
   const [rotateY, setRotateY] = useState(0);
   const [rotateZ, setRotateZ] = useState(0);
@@ -95,7 +95,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   }, []);
 
   return (
-    <div className="relative flex-1 flex flex-row! gap-2 bg-white rounded-lg overflow-hidden">
+    <div className="relative flex-1 flex flex-row! gap-2 bg-white rounded-lg">
       <div
         className="perspective-origin-center perspective-distant flex-1"
         style={{ perspective: `${distance}px` }}
