@@ -107,7 +107,7 @@ export function GenerateFloor({
       onClick={updateCurrent}
     >
       {/**Outer shape (L building)*/}
-      <path d={shape ?? "M0 0 H325 V375 H850 V675 H0 Z"} />
+      <path d={shape ?? ""} />
 
       {/* Legend */}
       {/* <g
@@ -151,7 +151,10 @@ export function GenerateFloor({
 
       {/* Rooms */}
       {rooms.map((room) => (
-        <g key={room.id}>
+        <g
+          key={room.id}
+          transform={`translate(${room?.origin?.x ?? 0} ${room?.origin?.y ?? 0})`}
+        >
           <polygon
             key={room.id}
             id={room.id}
