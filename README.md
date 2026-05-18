@@ -8,7 +8,7 @@ The goal is to explore how floor plans, rooms, and architectural layouts can be 
 
 ## Demo
 > [!NOTE]
-> This is an early example and will be updated when project is developed further, you can also view a live demo by visiting the [preview](room-planner-topaz.vercel.app/)
+> This is an early example and will be updated when project is developed further, you can also view a live demo by visiting the [preview](https://room-planner-topaz.vercel.app/)
 
 https://github.com/user-attachments/assets/36f64048-e22a-4ce0-80d5-ff1d5f8813d1
 
