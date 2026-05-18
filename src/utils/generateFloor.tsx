@@ -147,10 +147,9 @@ export function GenerateFloor({
             ${room.type === "room" && curRoom === room.id ? "fill-red-100 hover:fill-red-200 animate-pulse" : ""}
           `}
           />
-          {room.doors &&
-            room.doors?.map((door, i) => (
-              <GenerateDoor key={`${room.id}-${i}`} {...door} />
-            ))}
+          {room.doors?.map((door, i) => (
+            <GenerateDoor key={`${room.id}-${i}`} {...door} />
+          ))}
         </g>
       ))}
     </svg>
