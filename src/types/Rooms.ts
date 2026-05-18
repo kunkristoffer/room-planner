@@ -1,5 +1,5 @@
 export type ViewMode = "2D" | "3D";
-export type RoomType = "room" | "bathroom" | "stair" | "elevator" | "utility";
+export type RoomType = "room" | "bathroom" | "stair" | "elevator" | "utility" | "disabled";
 
 type Coordinate = { x: number; y: number };
 type Door = "left" | "right" | "double" | "sliding";
@@ -12,6 +12,8 @@ export interface Room {
   label?: string;
   /** Type of room dictates the shading, coloring and other effects ot the generated svg element */
   type: RoomType;
+  /** The origin of the room, used for relative coordinates */
+  origin: Coordinate;
   /** A set of coordinates for creating rectangles or polygons, must at least have 4 elements */
   points: Coordinate[];
   /** Optional: Any doors related to this room */
