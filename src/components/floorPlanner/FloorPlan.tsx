@@ -24,7 +24,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
   const pathName = usePathname();
   const router = useRouter();
   const viewMode = (searchParams.get("view") as ViewMode) ?? "3D";
-  const curFloor = Number(searchParams.get("floor")) ?? "1";
+  const curFloor = Number(searchParams.get("floor") ?? "1");
   const curRoom = searchParams.get("room") ?? "";
 
   // Handle state change
