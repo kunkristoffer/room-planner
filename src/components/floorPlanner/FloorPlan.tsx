@@ -110,13 +110,14 @@ export function FloorPlan({ floors }: FloorPlanProps) {
                 : "",
           }}
         >
-          {floorsFilled.map(({ floor, rooms }) => (
+          {floorsFilled.map(({ floor, rooms, shape }) => (
             <GenerateFloor
               key={floor}
               floor={floor}
               curFloor={curFloor}
               curRoom={curRoom}
               rooms={rooms}
+              shape={shape}
               className={`absolute ${curFloor === floor ? "bg-slate-300" : ""} transition-all duration-1000 hover:bg-slate-200`}
               handleClick={handleClick}
               style={generateFloorStyles({

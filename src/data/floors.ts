@@ -4,6 +4,7 @@ export const floors: FloorProp[] = [
   {
     floor: 0,
     label: "kjeller",
+    shape: "M0 375 H300 V375 H850 V675 H0 Z",
     rooms: [
       {
         id: "elevator-1",
@@ -152,24 +153,8 @@ export const floors: FloorProp[] = [
             angle: 180
           }
         ]
-      },
-      {
+      }, {
         id: "utility-1",
-        label: "",
-        type: "utility",
-        points: [
-          { x: 0, y: 0 },
-          { x: 325, y: 0 },
-          { x: 325, y: 375 },
-          { x: 300, y: 375 },
-          { x: 300, y: 325 },
-          { x: 200, y: 325 },
-          { x: 200, y: 375 },
-          { x: 0, y: 375 },
-        ],
-      },
-      {
-        id: "utility-2",
         label: "",
         type: "utility",
         points: [
@@ -179,13 +164,64 @@ export const floors: FloorProp[] = [
           { x: 0, y: 500 },
         ],
       },
-    ],
+    ]
   },
   {
     floor: 1,
     label: "Lobby",
+    shape: "M0 275 H300 V375 H850 V675 H0 Z",
     rooms: [
       {
+        id: "room-1",
+        type: "room",
+        points: [
+          { x: 0, y: 500 },
+          { x: 300, y: 500 },
+          { x: 300, y: 675 },
+          { x: 0, y: 675 },
+        ],
+        doors: [{ x: 150, y: 500, type: "double", angle: 0 }]
+      }, {
+        id: "room-2",
+        type: "room",
+        points: [
+          { x: 300, y: 500 },
+          { x: 600, y: 500 },
+          { x: 600, y: 675 },
+          { x: 300, y: 675 },
+        ],
+        doors: [{ x: 350, y: 500, type: "double", angle: 0 }]
+      }, {
+        id: "room-3",
+        type: "room",
+        points: [
+          { x: 600, y: 500 },
+          { x: 850, y: 500 },
+          { x: 850, y: 675 },
+          { x: 600, y: 675 },
+        ],
+        doors: [{ x: 650, y: 500, type: "double", angle: 0 }]
+      }, {
+        id: "room-4",
+        type: "room",
+        points: [
+          { x: 500, y: 200 },
+          { x: 850, y: 200 },
+          { x: 850, y: 375 },
+          { x: 500, y: 375 },
+        ],
+        doors: [{ x: 650, y: 375, type: "double", angle: 0 }]
+      },
+      {
+        id: "utility-1",
+        type: "utility",
+        points: [
+          { x: 0, y: 275 },
+          { x: 200, y: 275 },
+          { x: 200, y: 375 },
+          { x: 0, y: 375 },
+        ]
+      }, {
         id: "stair-1",
         type: "stair",
         points: [

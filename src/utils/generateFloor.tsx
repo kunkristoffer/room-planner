@@ -4,6 +4,7 @@ import { type ComponentProps, type MouseEvent, Fragment } from "react";
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
   floor: number;
+  shape?: string;
   curFloor: number;
   curRoom: string;
   handleClick: (floor: number, id: string, mode: ViewMode) => void;
@@ -62,6 +63,7 @@ export function GenerateFloor({
   curRoom,
   floor,
   rooms,
+  shape,
   handleClick,
   ...props
 }: FloorProps) {
@@ -105,7 +107,7 @@ export function GenerateFloor({
       onClick={updateCurrent}
     >
       {/**Outer shape (L building)*/}
-      <path d="M0 0 H325 V375 H850 V675 H0 Z"></path>
+      <path d={shape ?? "M0 0 H325 V375 H850 V675 H0 Z"} />
 
       {/* Legend */}
       {/* <g
