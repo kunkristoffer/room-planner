@@ -9,159 +9,107 @@ export const floors: FloorProp[] = [
       {
         id: "elevator-1",
         type: "elevator",
+        origin: { x: 200, y: 325, },
         points: [
-          { x: 200, y: 325 },
-          { x: 250, y: 325 },
-          { x: 250, y: 375 },
-          { x: 200, y: 375 },
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
         ],
         doors: [
-          {
-            x: 210,
-            y: 375,
-            type: "sliding",
-            angle: 0
-          }
-        ]
+          { x: 10, y: 50, type: "sliding", angle: 0, }
+        ],
       }, {
         id: "elevator-2",
         type: "elevator",
+        origin: { x: 250, y: 325, },
         points: [
-          { x: 250, y: 325 },
-          { x: 300, y: 325 },
-          { x: 300, y: 375 },
-          { x: 250, y: 375 },
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
         ],
         doors: [
-          {
-            x: 260,
-            y: 375,
-            type: "sliding",
-            angle: 0
-          }
+          { x: 10, y: 50, type: "sliding", angle: 0, }
+        ],
+      }, {
+        id: "stair-1",
+        type: "stair",
+        origin: { x: 350, y: 275, },
+        points: [
+          { x: 0, y: 0 },
+          { x: 150, y: 0 },
+          { x: 150, y: 100 },
+          { x: 0, y: 100 }
+        ],
+        doors: [
+          { x: 95, y: 100, type: "double", angle: 0 }
         ]
       }, {
-        id: "stair-2",
-        type: "stair",
-        points: [
-          { x: 350, y: 275 },
-          { x: 500, y: 275 },
-          { x: 500, y: 375 },
-          { x: 350, y: 375 },
-        ],
-        doors: [
-          {
-            x: 445,
-            y: 375,
-            type: "double",
-            angle: 0
-          }
-        ]
-      },
-      {
         id: "room-1",
-        label: "",
         type: "room",
+        origin: { x: 0, y: 500, },
         points: [
-          { x: 0, y: 500 },
-          { x: 300, y: 500 },
-          { x: 300, y: 675 },
-          { x: 0, y: 675 },
+          { x: 0, y: 0 },
+          { x: 300, y: 0 },
+          { x: 300, y: 175 },
+          { x: 0, y: 175 }
         ],
         doors: [
-          {
-            x: 200,
-            y: 500,
-            type: "left",
-            angle: 270
-          }, {
-            x: 250,
-            y: 500,
-            type: "left",
-            angle: 180
-          }
-        ]
-      },
-      {
+          { x: 200, y: 0, type: "left", angle: 270, },
+          { x: 250, y: 0, type: "left", angle: 180, }
+        ],
+      }, {
         id: "room-2",
-        label: "",
         type: "room",
+        origin: { x: 300, y: 500, },
         points: [
-          { x: 300, y: 500 },
-          { x: 600, y: 500 },
-          { x: 600, y: 675 },
-          { x: 300, y: 675 },
+          { x: 0, y: 0 },
+          { x: 300, y: 0 },
+          { x: 300, y: 175 },
+          { x: 0, y: 175 }
         ],
         doors: [
-          {
-            x: 350,
-            y: 500,
-            type: "left",
-            angle: 270
-          }, {
-            x: 400,
-            y: 500,
-            type: "left",
-            angle: 180
-          }
-        ]
-      },
-      {
+          { x: 50, y: 0, type: "left", angle: 270, },
+          { x: 100, y: 0, type: "left", angle: 180, }
+        ],
+      }, {
         id: "room-3",
-        label: "",
         type: "room",
+        origin: { x: 600, y: 500, },
         points: [
-          { x: 600, y: 500 },
-          { x: 850, y: 500 },
-          { x: 850, y: 675 },
-          { x: 600, y: 675 },
+          { x: 0, y: 0 },
+          { x: 250, y: 0 },
+          { x: 250, y: 175 },
+          { x: 0, y: 175 }
         ],
         doors: [
-          {
-            x: 650,
-            y: 500,
-            type: "left",
-            angle: 270
-          }, {
-            x: 700,
-            y: 500,
-            type: "left",
-            angle: 180
-          }
-        ]
-      },
-      {
+          { x: 50, y: 0, type: "left", angle: 270, },
+          { x: 100, y: 0, type: "left", angle: 180, }
+        ],
+      }, {
         id: "room-4",
-        label: "",
         type: "room",
+        origin: { x: 500, y: 275, },
         points: [
-          { x: 500, y: 275 },
-          { x: 850, y: 275 },
-          { x: 850, y: 375 },
-          { x: 500, y: 375 },
+          { x: 0, y: 0 },
+          { x: 350, y: 0 },
+          { x: 350, y: 100 },
+          { x: 0, y: 100 }
         ],
         doors: [
-          {
-            x: 675,
-            y: 375,
-            type: "right",
-            angle: 90
-          }, {
-            x: 700,
-            y: 400,
-            type: "right",
-            angle: 180
-          }
+          { x: 175, y: 100, type: "right", angle: 90 },
+          { x: 200, y: 125, type: "right", angle: 180 }
         ]
       }, {
         id: "utility-1",
-        label: "",
+        origin: { x: 0, y: 375 },
         type: "utility",
         points: [
-          { x: 0, y: 375 },
-          { x: 100, y: 375 },
-          { x: 100, y: 500 },
-          { x: 0, y: 500 },
+          { x: 0, y: 0 },
+          { x: 100, y: 0 },
+          { x: 100, y: 125 },
+          { x: 0, y: 125 }
         ],
       },
     ]
