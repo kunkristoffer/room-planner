@@ -14,7 +14,7 @@ export interface Room {
   type: RoomType;
   /** The origin of the room, used for relative coordinates */
   origin: Coordinate;
-  /** Optional: Generate path arrow to this rooms door based on coordinates starting at floor entrance */
+  /** Optional: Generate path arrow to this rooms door based on world coordinates starting at floor entrance */
   path?: Coordinate[]
   /** A set of coordinates for creating rectangles or polygons, must at least have 4 elements */
   points: Coordinate[];

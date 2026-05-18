@@ -200,7 +200,9 @@ export function GenerateFloor({
 
           {/* Pathfinding */}
           {curRoom === room.id && room?.path && room.path.length >= 2 && (
-            <g className="">
+            <g
+              transform={`translate(-${room?.origin?.x ?? 0} -${room?.origin?.y ?? 0})`}
+            >
               <path
                 d={coordsToPath(room.path)}
                 fill="none"
