@@ -72,7 +72,12 @@ export function GenerateFloor({
     const targetElement = event.target;
 
     if (targetElement instanceof SVGPolygonElement && curFloor === floor) {
-      handleClick(floor, targetElement.id, "2D");
+      const room = rooms.find((room) => room.id === targetElement.id);
+      if (room?.type === "room" && curRoom !== room.id) {
+        handleClick(floor, room.id, "2D");
+      } else {
+        handleClick(floor, "", "2D");
+      }
     } else {
       handleClick(floor, "", "3D");
     }
@@ -173,6 +178,7 @@ export function GenerateFloor({
 
           {/* Doors */}
           {room.type !== "disabled" &&
+            (curRoom.length ? (curRoom === room.id ? true : false) : true) &&
             room.doors?.map((door, i) => (
               <GenerateDoor key={`${room.id}-${i}`} {...door} />
             ))}
@@ -184,7 +190,7 @@ export function GenerateFloor({
                 d={coordsToPath(room.path)}
                 fill="none"
                 stroke="WhiteSmoke"
-                strokeWidth="6"
+                strokeWidth="10"
               />
               <path
                 d={coordsToPath(room.path)}
