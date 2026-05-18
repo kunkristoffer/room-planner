@@ -763,6 +763,72 @@ export const floors: FloorProp[] = [
     label: "Hoved område",
     rooms: [
       {
+        id: "stair-1",
+        type: "stair",
+        origin: { x: 800, y: 375 },
+        points: [
+          { x: 0, y: 0 },
+          { x: 0, y: 125 },
+          { x: 50, y: 125 },
+          { x: 50, y: 0 }
+        ],
+        doors: [
+          { x: 5, y: 100, type: "right", angle: 0 }
+        ],
+      }, {
+        id: "stair-2",
+        type: "stair",
+        origin: { x: 200, y: 375 },
+        points: [
+          { x: 0, y: 0 },
+          { x: 200, y: 0 },
+          { x: 200, y: 125 },
+          { x: 0, y: 125 }
+        ],
+        doors: [
+          { x: 0, y: 35, type: "left", angle: 0 },
+          { x: 0, y: 65, type: "right", angle: 0 }
+        ],
+      }, {
+        id: "stair-3",
+        type: "stair",
+        origin: { x: 200, y: 0 },
+        points: [
+          { x: 0, y: 0 },
+          { x: 125, y: 0 },
+          { x: 125, y: 50 },
+          { x: 0, y: 50 }
+        ],
+        doors: [
+          { x: 0, y: 20, type: "right", angle: 0 }
+        ],
+      }, {
+        id: "elevator-1",
+        type: "elevator",
+        origin: { x: 200, y: 325 },
+        points: [
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
+        ],
+        doors: [
+          { x: 10, y: 50, type: "sliding", angle: 0 }
+        ],
+      }, {
+        id: "elevator-2",
+        type: "elevator",
+        origin: { x: 250, y: 325 },
+        points: [
+          { x: 0, y: 0 },
+          { x: 50, y: 0 },
+          { x: 50, y: 50 },
+          { x: 0, y: 50 }
+        ],
+        doors: [
+          { x: 10, y: 50, type: "sliding", angle: 0 }
+        ],
+      }, {
         id: "room-1",
         type: "room",
         origin: { x: 0, y: 0 },
@@ -771,6 +837,12 @@ export const floors: FloorProp[] = [
           { x: 0, y: 260 },
           { x: 150, y: 260 },
           { x: 150, y: 0 }
+        ],
+        path: [
+          { x: 100, y: 130 },
+          { x: 175, y: 130 },
+          { x: 175, y: 440 },
+          { x: 250, y: 440 },
         ],
         doors: [
           { type: "left", x: 150, y: 120, angle: 0 }
@@ -951,72 +1023,6 @@ export const floors: FloorProp[] = [
         ],
         doors: [
           { type: "left", x: 0, y: 15, angle: 90 }
-        ],
-      }, {
-        id: "stair-1",
-        type: "stair",
-        origin: { x: 800, y: 375 },
-        points: [
-          { x: 0, y: 0 },
-          { x: 0, y: 125 },
-          { x: 50, y: 125 },
-          { x: 50, y: 0 }
-        ],
-        doors: [
-          { x: 5, y: 100, type: "right", angle: 0 }
-        ],
-      }, {
-        id: "stair-2",
-        type: "stair",
-        origin: { x: 200, y: 375 },
-        points: [
-          { x: 0, y: 0 },
-          { x: 200, y: 0 },
-          { x: 200, y: 125 },
-          { x: 0, y: 125 }
-        ],
-        doors: [
-          { x: 0, y: 35, type: "left", angle: 0 },
-          { x: 0, y: 65, type: "right", angle: 0 }
-        ],
-      }, {
-        id: "stair-3",
-        type: "stair",
-        origin: { x: 200, y: 0 },
-        points: [
-          { x: 0, y: 0 },
-          { x: 125, y: 0 },
-          { x: 125, y: 50 },
-          { x: 0, y: 50 }
-        ],
-        doors: [
-          { x: 0, y: 20, type: "right", angle: 0 }
-        ],
-      }, {
-        id: "elevator-1",
-        type: "elevator",
-        origin: { x: 200, y: 325 },
-        points: [
-          { x: 0, y: 0 },
-          { x: 50, y: 0 },
-          { x: 50, y: 50 },
-          { x: 0, y: 50 }
-        ],
-        doors: [
-          { x: 10, y: 50, type: "sliding", angle: 0 }
-        ],
-      }, {
-        id: "elevator-2",
-        type: "elevator",
-        origin: { x: 250, y: 325 },
-        points: [
-          { x: 0, y: 0 },
-          { x: 50, y: 0 },
-          { x: 50, y: 50 },
-          { x: 0, y: 50 }
-        ],
-        doors: [
-          { x: 10, y: 50, type: "sliding", angle: 0 }
         ],
       }, {
         id: "toilet-1",

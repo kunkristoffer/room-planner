@@ -1,5 +1,6 @@
 import type { RoomType, Room, ViewMode } from "@/types/Rooms";
 import { type ComponentProps, type MouseEvent, Fragment } from "react";
+import { coordsToPath } from "./misc";
 
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
@@ -157,6 +158,7 @@ export function GenerateFloor({
           key={room.id}
           transform={`translate(${room?.origin?.x ?? 0} ${room?.origin?.y ?? 0})`}
         >
+          {/* Room shape */}
           <polygon
             key={room.id}
             id={room.id}
@@ -168,10 +170,46 @@ export function GenerateFloor({
                 : getRoomColor(room.type)
             }
           />
+
+          {/* Doors */}
           {room.type !== "disabled" &&
             room.doors?.map((door, i) => (
               <GenerateDoor key={`${room.id}-${i}`} {...door} />
             ))}
+
+          {/* Pathfinding */}
+          {curRoom === room.id && room?.path && room.path.length >= 2 && (
+            <g className="z-10">
+              <path
+                d={coordsToPath(room.path)}
+                fill="none"
+                stroke="WhiteSmoke"
+                strokeWidth="6"
+              />
+              <path
+                d={coordsToPath(room.path)}
+                fill="none"
+                stroke="red"
+                strokeWidth="4"
+                strokeDasharray="10 5"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from="0"
+                  to="30"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </path>
+              <circle
+                cx={room.path.at(-1)?.x}
+                cy={room.path.at(-1)?.y}
+                r={10}
+                fill="red"
+                stroke="none"
+              />
+            </g>
+          )}
         </g>
       ))}
     </svg>
