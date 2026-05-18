@@ -1,5 +1,6 @@
 import type { RoomType, Room, ViewMode } from "@/types/Rooms";
 import { type ComponentProps, type MouseEvent, Fragment } from "react";
+import { coordsToPath } from "./misc";
 
 interface FloorProps extends ComponentProps<"svg"> {
   rooms: Room[];
@@ -15,7 +16,10 @@ function GenerateDoor({
   y,
   angle,
   type,
-}: NonNullable<Room["doors"]>[number]) {
+  isVisible,
+}: NonNullable<Room["doors"]>[number] & { isVisible: boolean }) {
+  if (!isVisible) return null;
+
   if (type === "sliding" || type === "double")
     return (
       <g transform={`translate(${x} ${y}) rotate(${angle})`}>
@@ -71,7 +75,12 @@ export function GenerateFloor({
     const targetElement = event.target;
 
     if (targetElement instanceof SVGPolygonElement && curFloor === floor) {
-      handleClick(floor, targetElement.id, "2D");
+      const room = rooms.find((room) => room.id === targetElement.id);
+      if (room?.type === "room" && curRoom !== room.id) {
+        handleClick(floor, room.id, "2D");
+      } else {
+        handleClick(floor, "", "2D");
+      }
     } else {
       handleClick(floor, "", "3D");
     }
@@ -82,15 +91,15 @@ export function GenerateFloor({
   ): ComponentProps<"polygon">["className"] {
     switch (type) {
       case "room":
-        return "fill-purple-100 hover:fill-purple-300";
+        return "fill-rose-100 hover:fill-rose-200";
       case "bathroom":
-        return "fill-green-100 hover:fill-green-300";
+        return "fill-green-100 hover:fill-green-200";
       case "utility":
-        return "fill-gray-100 hover:fill-gray-300";
+        return "fill-gray-100 hover:fill-gray-200";
       case "elevator":
-        return "fill-yellow-100 hover:fill-yellow-300";
+        return "fill-yellow-100 hover:fill-yellow-200";
       case "stair":
-        return "fill-blue-100 hover:fill-blue-300";
+        return "fill-blue-100 hover:fill-blue-200";
       case "disabled":
         return "fill-white";
       default:
@@ -157,6 +166,7 @@ export function GenerateFloor({
           key={room.id}
           transform={`translate(${room?.origin?.x ?? 0} ${room?.origin?.y ?? 0})`}
         >
+          {/* Room shape */}
           <polygon
             key={room.id}
             id={room.id}
@@ -168,10 +178,68 @@ export function GenerateFloor({
                 : getRoomColor(room.type)
             }
           />
+
+          {/* Doors */}
           {room.type !== "disabled" &&
             room.doors?.map((door, i) => (
-              <GenerateDoor key={`${room.id}-${i}`} {...door} />
+              <GenerateDoor
+                key={`${room.id}-${i}`}
+                /* i hate ternaries, but this was the fastet to troubleshoot */
+                isVisible={
+                  curRoom.length
+                    ? curRoom === room.id
+                      ? true
+                      : room.type === "stair"
+                        ? true
+                        : false
+                    : true
+                }
+                {...door}
+              />
             ))}
+
+          {/* Pathfinding */}
+          {curRoom === room.id && room?.path && room.path.length >= 2 && (
+            <g
+              transform={`translate(-${room?.origin?.x ?? 0} -${room?.origin?.y ?? 0})`}
+            >
+              <path
+                d={coordsToPath(room.path)}
+                fill="none"
+                stroke="WhiteSmoke"
+                strokeWidth="10"
+              />
+              <path
+                d={coordsToPath(room.path)}
+                fill="none"
+                stroke="red"
+                strokeWidth="4"
+                strokeDasharray="10 5"
+              >
+                <animate
+                  attributeName="stroke-dashoffset"
+                  from="0"
+                  to="30"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </path>
+              <circle
+                cx={room.path.at(0)?.x}
+                cy={room.path.at(0)?.y}
+                r={10}
+                fill="red"
+                stroke="none"
+              />
+              <circle
+                cx={room.path.at(-1)?.x}
+                cy={room.path.at(-1)?.y}
+                r={10}
+                fill="red"
+                stroke="none"
+              />
+            </g>
+          )}
         </g>
       ))}
     </svg>

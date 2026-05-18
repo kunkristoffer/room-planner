@@ -21,3 +21,8 @@ export function fillFloorNumbers(floors: FloorProp[]) {
 
     return filledFloors
 }
+
+/** Generate a path element data from list of coordinates */
+export function coordsToPath(coordinates: { x: number; y: number }[]) {
+    return coordinates.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
+}
