@@ -471,7 +471,7 @@ export const floors: FloorProp[] = [
     rooms: [
       {
         id: "room-1",
-        type: "room",
+        type: "disabled",
         origin: { x: 0, y: 0 },
         points: [
           { x: 0, y: 0 },
@@ -523,7 +523,7 @@ export const floors: FloorProp[] = [
         ],
       }, {
         id: "room-5",
-        type: "room",
+        type: "disabled",
         origin: { x: 500, y: 550 },
         points: [
           { x: 0, y: 0 },
@@ -536,7 +536,7 @@ export const floors: FloorProp[] = [
         ],
       }, {
         id: "room-6",
-        type: "room",
+        type: "disabled",
         origin: { x: 700, y: 550 },
         points: [
           { x: 0, y: 0 },
@@ -549,7 +549,7 @@ export const floors: FloorProp[] = [
         ],
       }, {
         id: "room-7",
-        type: "room",
+        type: "disabled",
         origin: { x: 550, y: 375 },
         points: [
           { x: 0, y: 0 },
@@ -562,7 +562,7 @@ export const floors: FloorProp[] = [
         ],
       }, {
         id: "room-8",
-        type: "room",
+        type: "disabled",
         origin: { x: 200, y: 200 },
         points: [
           { x: 0, y: 0 },
@@ -575,7 +575,7 @@ export const floors: FloorProp[] = [
         ],
       }, {
         id: "room-9",
-        type: "room",
+        type: "disabled",
         origin: { x: 200, y: 50 },
         points: [
           { x: 0, y: 0 },
