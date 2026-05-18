@@ -118,7 +118,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
               curRoom={curRoom}
               rooms={rooms}
               shape={shape}
-              className={`absolute ${curFloor === floor ? "bg-slate-300" : ""} transition-all duration-1000 hover:bg-slate-200`}
+              className={`absolute ${curFloor === floor ? "bg-slate-300" : ""} ${viewMode === "3D" ? "hover:bg-slate-300" : ""} transition-all duration-1000`}
               handleClick={handleClick}
               style={generateFloorStyles({
                 floor,
