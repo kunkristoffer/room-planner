@@ -22,4 +22,10 @@ export interface Room {
   wallThickness?: number;
 }
 
-export type FloorProp = { floor: number; label?: string; rooms: Room[] };
+export type FloorProp = {
+  floor: number;
+  label?: string;
+  rooms: Room[],
+  /** Optional: Override floor shape with path data */
+  shape?: string
+};
