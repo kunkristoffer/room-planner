@@ -145,7 +145,7 @@ export function FloorPlan({ floors }: FloorPlanProps) {
           ))}
         </div>
       </div>
-      <div className="absolute left-full flex-col gap-2 text-black bg-white z-50 w-36 p-4 flex">
+      <div className="absolute left-full flex-col gap-2 text-black bg-white z-50 w-36 p-4 hidden">
         <DebugSlider
           label="Translate X"
           value={translateX}
