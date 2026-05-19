@@ -3,6 +3,8 @@ import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 import { floors } from "@/data/floors";
 import { Suspense } from "react";
+import { FloorDialog } from "@/components/ui/modals/FloorDialog";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -109,7 +111,15 @@ export default function Home() {
               <p>Can be run in english</p>
             </span>
           </div>
-          <div className="border rounded-md p-4">
+          <div className="border rounded-md p-4 flex flex-col gap-4">
+            <FloorDialog floors={floors} />
+            <Link
+              target="_blank"
+              href="/full?floor=7&room=room-1"
+              className="p-2 w-full text-center rounded-md bg-foreground hover:brightness-110 border border-gray-600 shadow-md hover:shadow-gray-900/80"
+            >
+              Open permalink to room
+            </Link>
             <Suspense>
               <FloorDetails />
             </Suspense>
