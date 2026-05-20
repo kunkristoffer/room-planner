@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useRef } from "react";
+import { MouseEvent, Suspense, useRef } from "react";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 
 interface FloorDialogProps {
@@ -38,7 +38,9 @@ export function FloorDialog({ floor, room }: FloorDialogProps) {
         closedby="any"
       >
         <div className="relative mx-auto container flex aspect-square lg:aspect-video bg-foreground rounded-md">
-          <FloorPlan floor={floor} room={room} />
+          <Suspense>
+            <FloorPlan floor={floor} room={room} />
+          </Suspense>
           <button
             type="button"
             className="absolute top-2 right-2 bg-background text-white rounded-full size-8 hover:brightness-110 z-50"

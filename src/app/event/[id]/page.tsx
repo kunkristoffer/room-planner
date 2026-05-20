@@ -1,7 +1,4 @@
 import { testEvents } from "@/data/events";
-import { Suspense } from "react";
-import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
-import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import Image from "next/image";
 import Link from "next/link";
 import { FloorDialog } from "@/components/ui/modals/FloorDialog";
