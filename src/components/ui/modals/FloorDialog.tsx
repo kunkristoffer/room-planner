@@ -1,22 +1,15 @@
 "use client";
 
-import { type FloorProp } from "@/types/Rooms";
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useRef } from "react";
 import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
 
 interface FloorDialogProps {
-  floors: FloorProp[];
+  floor?: number;
+  room?: string;
 }
 
-export function FloorDialog({ floors }: FloorDialogProps) {
+export function FloorDialog({ floor, room }: FloorDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-
-  function handleClose(e: MouseEvent<HTMLDialogElement | HTMLButtonElement>) {
-    e.stopPropagation();
-    if (dialogRef.current) {
-      const isOpen = dialogRef.current.open;
-    }
-  }
 
   function handleToggle(e: MouseEvent<HTMLDialogElement | HTMLButtonElement>) {
     e.stopPropagation();
@@ -45,7 +38,7 @@ export function FloorDialog({ floors }: FloorDialogProps) {
         closedby="any"
       >
         <div className="relative mx-auto container flex aspect-square lg:aspect-video bg-foreground rounded-md">
-          <FloorPlan floors={floors} />
+          <FloorPlan floor={floor} room={room} />
           <button
             type="button"
             className="absolute top-2 right-2 bg-background text-white rounded-full size-8 hover:brightness-110 z-50"

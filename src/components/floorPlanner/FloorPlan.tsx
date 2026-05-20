@@ -13,21 +13,23 @@ import { FloorNumberSlider } from "../ui/inputs/FloorNumber";
 import { DebugSlider } from "../ui/inputs/DebugSlider";
 import { ViewModeSelect } from "../ui/inputs/ViewMode";
 import { FloorSlider } from "../ui/inputs/FloorSlider";
+import { floors } from "@/data/floors";
 
 interface FloorPlanProps {
-  floors: FloorProp[];
+  floor?: number;
+  room?: string;
 }
 
-export function FloorPlan({ floors }: FloorPlanProps) {
+export function FloorPlan(props: FloorPlanProps) {
   // Get state from url
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
 
   const viewMode = (searchParams.get("view") as ViewMode) ?? "3D";
-  const rawFloor = Number(searchParams.get("floor") ?? "1");
+  const rawFloor = Number(searchParams.get("floor") ?? props.floor ?? "1");
   const curFloor = Number.isInteger(rawFloor) ? rawFloor : 1;
-  const curRoom = searchParams.get("room") ?? "";
+  const curRoom = searchParams.get("room") ?? props.room ?? "";
 
   // Handle state change
   function handleClick(newFloor: number, id: string, mode?: ViewMode) {
