@@ -68,7 +68,7 @@ export function generateFloorStyles({
 			rotateY(${rotate.y}deg)
 			rotateZ(${rotate.z}deg)
 		`,
-    zIndex: 100 - delta,
+    zIndex: maxFloors - delta,
     transformOrigin: "top",
     opacity: delta ? clamp(strength, 0, 0.5) : 1,
     height: "100%",

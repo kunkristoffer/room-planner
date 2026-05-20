@@ -1,9 +1,7 @@
 import { testEvents } from "@/data/events";
-import { Suspense } from "react";
-import { FloorPlan } from "@/components/floorPlanner/FloorPlan";
-import { FloorDetails } from "@/components/floorPlanner/FloorDetails";
 import Image from "next/image";
 import Link from "next/link";
+import { FloorDialog } from "@/components/ui/modals/FloorDialog";
 
 export async function generateStaticParams() {
   return testEvents.map((event) => ({
@@ -85,9 +83,14 @@ export default async function Page({
           <div className="flex flex-col gap-4 p-4 bg-foreground rounded-md">
             <Link
               href={`/full?floor=${event.metadata.floor}&room=${event.metadata.roomId}`}
+              className="p-2 w-full text-center rounded-md bg-foreground hover:brightness-110 border border-gray-600 shadow-md hover:shadow-gray-900/80"
             >
               Åpne rom i permalink
             </Link>
+            <FloorDialog
+              floor={event.metadata.floor}
+              room={event.metadata.roomId}
+            />
           </div>
         </div>
       </div>

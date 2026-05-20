@@ -8,7 +8,7 @@ export default function Page() {
     <main className="flex-1 container mx-auto flex flex-col gap-8 p-4">
       <Suspense>
         <div className="flex-1 flex">
-          <FloorPlan floors={floors} />
+          <FloorPlan />
         </div>
         <div>
           <FloorDetails />
