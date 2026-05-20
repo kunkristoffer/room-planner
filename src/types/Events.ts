@@ -18,6 +18,7 @@ export interface Event {
         beginnerFriendly: boolean
         englishFriendly: boolean
         roomId: string
+        floor: number
     }
     slots: string[]
     media: {
