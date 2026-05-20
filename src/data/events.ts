@@ -1,6 +1,6 @@
 import { Event } from "@/types/Events";
 
-const testEvents: Event[] = [
+export const testEvents: Event[] = [
     {
         id: "event-001",
         title: "Dungeons & Dragons: Den svarte myren",
@@ -17,12 +17,13 @@ const testEvents: Event[] = [
             audience: "teens",
             beginnerFriendly: true,
             englishFriendly: true,
-            roomId: "room-a1",
+            roomId: "room-1",
+            floor: 7
         },
         slots: ["friday-evening", "saturday-morning"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Landsbyen Dunmere har blitt stille etter at merkelige lys ble observert ute i myrområdene. Eventyrere må undersøke hva som har skjedd og avdekke sannheten bak forsvinningene.",
@@ -48,12 +49,13 @@ const testEvents: Event[] = [
             audience: "adults",
             beginnerFriendly: false,
             englishFriendly: true,
-            roomId: "room-b4",
+            roomId: "room-4",
+            floor: 7
         },
         slots: ["saturday-evening"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Spillere konkurrerer i en strukturert Terraforming Mars-turnering med Prelude-utvidelsen.",
@@ -78,12 +80,13 @@ const testEvents: Event[] = [
             audience: "all",
             beginnerFriendly: true,
             englishFriendly: true,
-            roomId: "room-c2",
+            roomId: "room-2",
+            floor: 7
         },
         slots: ["friday-evening"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Bring your favorite Commander deck and join casual multiplayer games throughout the evening.",
@@ -109,12 +112,13 @@ const testEvents: Event[] = [
             audience: "adults",
             beginnerFriendly: true,
             englishFriendly: false,
-            roomId: "room-d7",
+            roomId: "room-7",
+            floor: 7
         },
         slots: ["saturday-evening"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "A fishing village outside Bergen has reported impossible sightings near the harbor during the night tide. Investigators are sent to uncover what is hiding beneath the cold waters.",
@@ -139,12 +143,13 @@ const testEvents: Event[] = [
             audience: "all",
             beginnerFriendly: true,
             englishFriendly: true,
-            roomId: "room-f1",
+            roomId: "room-1",
+            floor: 6
         },
         slots: ["sunday-morning"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Learn the basics of Carcassonne in a relaxed and friendly environment suitable for all ages.",
@@ -169,12 +174,13 @@ const testEvents: Event[] = [
             audience: "adults",
             beginnerFriendly: false,
             englishFriendly: true,
-            roomId: "room-h3",
+            roomId: "room-3",
+            floor: 6
         },
         slots: ["friday-night"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Night City never sleeps, and neither do the corporations hunting your crew. After a stolen data shard surfaces on the black market, a desperate fixer hires the team to retrieve it before the city erupts into violence.",
@@ -200,12 +206,13 @@ const testEvents: Event[] = [
             audience: "all",
             beginnerFriendly: true,
             englishFriendly: true,
-            roomId: "room-k5",
+            roomId: "room-1",
+            floor: 0
         },
         slots: ["saturday-afternoon"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Classic Uno is already chaotic, but this tournament introduces rotating house rules every round.",
@@ -230,12 +237,13 @@ const testEvents: Event[] = [
             audience: "teens",
             beginnerFriendly: false,
             englishFriendly: true,
-            roomId: "room-l8",
+            roomId: "room-2",
+            floor: 0
         },
         slots: ["sunday-afternoon"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "This workshop focuses on advanced faction strategy, counterplay, and table politics in Root.",
@@ -260,12 +268,13 @@ const testEvents: Event[] = [
             audience: "all",
             beginnerFriendly: true,
             englishFriendly: false,
-            roomId: "room-p2",
+            roomId: "room-3",
+            floor: 6
         },
         slots: ["sunday-morning"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "A welcoming space for younger Pokémon fans to play games, learn rules, and trade cards safely.",
@@ -290,12 +299,13 @@ const testEvents: Event[] = [
             audience: "all",
             beginnerFriendly: true,
             englishFriendly: true,
-            roomId: "main-hall",
+            roomId: "room-6",
+            floor: 7
         },
         slots: ["saturday-full-day"],
         media: {
-            coverImage: "/placeholder.jpg",
-            previewImage: "/placeholder.jpg",
+            coverImage: "/game.png",
+            previewImage: "/game.png",
         },
         content: [
             "Join a full day of board gaming featuring classics, modern strategy games, party games, and cooperative experiences. Tables will rotate throughout the day to encourage participants to meet new people and try different genres.",
